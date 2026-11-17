@@ -1,5 +1,13 @@
 # SMART-DEV
 
+## Integrantes 
+
+01. Giovanna Bueno Bento 
+02. Gabriel Leite Camandona
+03. Nicolly de Jesus Lima
+
 ## Entregas 
 
-Acesse as entregas aqui: [Entregas Diárias](https://drive.google.com/drive/folders/11jV8O3-_odMPn4wxh5m-LmA4Uh0q5jHv)
+Acesse as entregas aqui: 
+
+[Entrega 01 - 16/11](https://drive.google.com/drive/folders/17beAI5FE7loITv2s7rKBDD9O3-lVkSej)
