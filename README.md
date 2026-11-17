@@ -12,4 +12,6 @@
 
 Acesse as entregas aqui: 
 
-[Entrega 01 - 16/11](https://drive.google.com/drive/folders/17beAI5FE7loITv2s7rKBDD9O3-lVkSej)
+- [Entrega 01 - 16/11](https://drive.google.com/drive/folders/17beAI5FE7loITv2s7rKBDD9O3-lVkSej)
+
+- [Entrega 02 - 17/11 a 18/11](https://drive.google.com/drive/folders/1mAMu8FQ4uZpEKrKRmoEWHWQCgujqmZ3X)
