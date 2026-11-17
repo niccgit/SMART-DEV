@@ -1,10 +1,12 @@
 # SMART-DEV
 
-## Integrantes 
+## Integrantes
 
-01. Giovanna Bueno Bento 
-02. Gabriel Leite Camandona
-03. Nicolly de Jesus Lima
+| Nome | GitHub |
+|------|--------|
+| Giovanna Bueno Bento | [![GitHub](https://img.shields.io/badge/GITHUB-GBBFREELA--628-000000?style=for-the-badge&logo=github&labelColor=555555)](https://github.com/gbbfreela-628) |
+| Gabriel Leite Camandona | [![GitHub](https://img.shields.io/badge/GITHUB-GABRIEL--CAMANDONA-000000?style=for-the-badge&logo=github&labelColor=555555)](https://github.com/Gabriel-Camandona) |
+| Nicolly de Jesus Lima | [![GitHub](https://img.shields.io/badge/GITHUB-NICCGIT-000000?style=for-the-badge&logo=github&labelColor=555555)](https://github.com/niccgit) |
 
 ## Entregas 
 
