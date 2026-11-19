@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    font-size: larger;
+    background-color: lightgray;
+}
+header div {
+    display: flex;
+    align-items: center;
+}
+header div img {
+    height: 64px;
+    margin-right: 8px;
+} 
+nav span{
+    margin: 16px;
+}
+header button {
+    padding: 8px;
+    font-size: large;
+}
