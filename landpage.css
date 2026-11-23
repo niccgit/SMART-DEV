@@ -2,28 +2,68 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: Kreon;
+    letter-spacing: 0.7px;
 }
+
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
 header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    font-size: larger;
-    background-color: lightgray;
+    flex-direction: row;
+    height: 9vh;
+    width: 100vw;
+    background-color: #CF4845;
 }
-header div {
+
+.logo{
     display: flex;
-    align-items: center;
+    position: absolute;
+    left: 1vw;
+    top: 4vh
 }
-header div img {
-    height: 64px;
-    margin-right: 8px;
-} 
-nav span{
-    margin: 16px;
+
+h2{
+    display: flex;
+    position: absolute;
+    left: 9vw;
+    top: 2.2vh;
+    font-style: italic;
+    width: 10vw;
+    color: #F4E9D8;
+    letter-spacing: 0.5px;
+    font-weight: 400;
 }
-header button {
-    padding: 8px;
-    font-size: large;
+
+
+.menu1{
+    display: flex;
+    position: absolute;
+    left: 40vw;
+    top: 5.2vh;
+    color: #F4E9D8;
+    font-size: 22px;
+}
+
+.menu2{
+    display: flex;
+    position: absolute;
+    left: 53.4vw;
+    top: 5.2vh;
+    color: #F4E9D8;
+    font-size: 22px;
+}
+
+.menu3{
+    display: flex;
+    position: absolute;
+    left: 65vw;
+    top: 5.2vh;
+    color: #F4E9D8;
+    font-size: 22px;
 }
