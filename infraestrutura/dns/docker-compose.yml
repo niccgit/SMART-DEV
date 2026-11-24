@@ -1,0 +1,11 @@
+services:
+  dns:
+    image: ubuntu/bind9:latest
+    container_name: dns_delivery
+    restart: "unless-stopped"
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ./named.conf:/etc/bind/named.conf
+      - ./zonas:/etc/bind/zonas

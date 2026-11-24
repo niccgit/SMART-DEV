@@ -1,0 +1,16 @@
+$TTL 86400
+
+@ IN SPA ns1.delivery.test.admin.delivery.test. (
+    2026112401
+    3600
+    1800
+    604800
+    86400
+)
+
+@ IN NS ns1.delivery.test.
+
+ns1 IN A 10.107.140.21
+@ IN A 10.107.140.21
+www IN A 10.107.140.21
+app IN A 10.107.140.21
