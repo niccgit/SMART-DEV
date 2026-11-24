@@ -14,5 +14,88 @@
        <div class="menu2">Benefícios</div>
        <div class="menu3">Código</div>
     </header>
+    <main class="main">
+        <div class="conteiner1">
+            <div class="title1">O Melhor jeito de
+administrar sua floricultura</div>
+            <div class="text1">Aqui você ira encontrar seu melhor
+ investimento para a organização do seu negócio, esqueça a correria da
+ escrita em papel, venha conhecer nosso sistema!
+            </div>
+            <div class="img1"><img src="./Buque.png"></div>
+           
+           <div class="conteiner2">
+            <div class="unir"><textarea class="campo" id="campo-texto" rows="4" cols="35" placeholder="Deixe sua sugestão..."></textarea><br><br>
+ 
+            <button class="enviar" onclick="salvarSugestao()">Enviar</button>
+           </div>
+            <a class="versugestoes" id="btn-ver" onclick="alternarVisualizacao()">Ver Sugestões</a>
+             
+             <!-- Área onde as mensagens ficam (começa escondida com display: none) -->
+            <div class="conteiner3"> <div id="lista-sugestoes" style="display: none;flex-basis: 100%; margin-top: 20px;"></div></div>
+           
+           <script>
+             const divLista = document.getElementById("lista-sugestoes");
+            const btnVer = document.getElementById("btn-ver");
+
+
+            function salvarSugestao() {
+            let texto = document.getElementById("campo-texto").value;
+             if (texto === "") return;
+
+
+            // Salva na gaveta do navegador
+            let lista = JSON.parse(localStorage.getItem("minhas_sugestoes")) || [];
+            lista.push(texto);
+            localStorage.setItem("minhas_sugestoes", JSON.stringify(lista));
+
+
+            // Limpa a caixa de texto
+            document.getElementById("campo-texto").value = "";
+
+
+            // Atualiza a lista por dentro (mesmo se estiver escondida)
+            atualizarTela();
+            alert("Sugestão salva!");
+           }
+
+
+           function atualizarTela() {
+           let lista = JSON.parse(localStorage.getItem("minhas_sugestoes")) || [];
+     
+          if (lista.length === 0) {
+           divLista.innerHTML = "<p>Nenhuma sugestão enviada ainda.</p>";
+           return;
+          }
+
+
+          divLista.innerHTML = "<h4>Sugestões salvas:</h4>";
+          lista.forEach(item => {
+          divLista.innerHTML += "<p>💬 " + item + "</p>";
+         });
+        }
+
+
+         function alternarVisualizacao() {
+        // Se estiver escondido, mostra na tela
+        if (divLista.style.display === "none") {
+         atualizarTela();
+         divLista.style.display = "block";
+         btnVer.innerText = "Esconder Sugestões";
+       }
+        // Se já estiver aparecendo, esconde de novo
+         else {
+         divLista.style.display = "none";
+         btnVer.innerText = "Ver Sugestões";
+       }
+       }
+    
+        </script>
+      </div>
+      <div class="text2">Você possui alguma sugestão de melhoria para o nosso código? 
+        Conte-nos no campo acima.</div>
+     </div>
+       <div class="faixa1">Conheça um novo mundo de possibilidades com um sistema inovador!</div>
+    </main>
 </body>
 </html>
