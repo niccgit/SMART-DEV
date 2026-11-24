@@ -37,6 +37,10 @@ header {
     height: 78px;
     font-style: italic;
 }
+h1 {
+    font-style: inherit;
+    font-size: inherit;
+}
 .logo img{
     width: 144px;
     transform: translateY(25%)
@@ -52,3 +56,21 @@ header nav {
 header div {
     min-width: 356px;
 }
+main {
+    padding: 64px;
+}
+.section1 {
+    color: black;
+    display: flex;
+    flex-direction: row;
+}
+.section1 .left-beef {
+    width: 60vw;
+}
+.left-beef h2 {
+    font-size: 60px;
+    color: var(--main-color);
+}
+.section1 img {
+
+} 
