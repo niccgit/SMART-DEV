@@ -1,0 +1,1 @@
+docker run --rm -it --name sitema -p 8501:8501 -v ".\python:/app/" --privileged=true --device=/dev/snd:/dev/snd streamlit streamlit run /app/main.py --server.port 8501
