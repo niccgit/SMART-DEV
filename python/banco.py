@@ -1,4 +1,3 @@
-
 import sqlite3
 import hashlib
 
@@ -144,3 +143,33 @@ def validar_senha(senha):
         return "A senha precisa de no mínimo um número."
 
     return None
+
+def buscar_usuarios(email, senha):
+
+    senha = criptografar_senha(senha)
+    usuario = consultar(
+        """
+        SELECT id, nome_completo, cpf, setor,
+               email_corporativo, situacao
+        FROM usuarios
+        WHERE email_corporativo = ? COLLATE NOCASE
+        AND senha = ?
+        AND situacao = 'Ativo'
+        """,
+        (email.strip(), senha)
+    )
+    if len(usuario) > 0:
+        return usuario[0]
+    return None
+
+def listar_usuarios():
+
+    usuarios = consultar(
+        """
+        SELECT id, nome_completo, cpf, setor,
+               email_corporativo, situacao
+        FROM usuarios
+        ORDER BY id
+        """
+    )
+    return usuarios
