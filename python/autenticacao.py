@@ -1,3 +1,5 @@
+# verificar variaveis q nao foram definidas nic
+
 import bcrypt
 from banco import conectar
 
