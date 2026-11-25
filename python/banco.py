@@ -5,7 +5,6 @@ DB_NAME = "floricultura.db"
 def conectar():
     conexao = sqlite3.connect(DB_NAME)
     conexao.row_factory = sqlite3.Row
-
     return conexao
 
 def criar_tabela_usuarios():
@@ -15,15 +14,14 @@ def criar_tabela_usuarios():
     sql = """
     CREATE TABLE IF NOT EXISTS usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
         email TEXT NOT NULL UNIQUE,
-        senha TEXT NOT NULL,
         salt TEXT NOT NULL,
         senha_hash TEXT NOT NULL,
         tipo TEXT NOT NULL,
         trocar_senha INTEGER DEFAULT 0
     )
     """
-
     conexao.commit()
     conexao.close()
 
@@ -42,3 +40,6 @@ def criar_tabela_usuarios():
     """
     conexao.commit()
     conexao.close()
+
+def inicializar_banco():
+    criar_tabela_usuarios()
