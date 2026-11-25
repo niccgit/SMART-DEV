@@ -101,3 +101,30 @@ def criar_tabelas():
             situacao TEXT NOT NULL DEFAULT 'Ativo'
         )
     """)
+
+""")
+
+    criar_root()
+def criar_root():
+
+    usuario = consultar(
+        "SELECT * FROM usuarios WHERE email_corporativo = ?",
+        (email_root,)
+    )
+
+    if len(usuario) == 0:
+        executar(
+            """
+            INSERT INTO usuarios
+            (nome_completo, cpf, setor, email_corporativo, senha, situacao)
+            VALUES (?, ?, ?, ?, ?, ?)
+            """,
+            (
+                "Root",
+                "000.000.000-00",
+                "Administração",
+                email_root,
+                criptografar_senha(senha_root),
+                "Ativo"
+            )
+        )
