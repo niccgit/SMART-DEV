@@ -22,13 +22,13 @@ def conexao_banco():
     sql = """
     CREATE TABLE IF NOT EXISTS produtos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        imagem 
-        nome TEXT NOT NULL UNIQUE,
+        imagem TEXT NOT NULL,
+        nome TEXT NOT NULL,
         tipo TEXT NOT NULL,
         variacao TEXT NOT NULL,
         preco TEXT NOT NULL,
-        situacao TEXT NOT NULL UNIQUE,
-        estoque TEXT NOT NULL,
+        situacao TEXT NOT NULL,
+        estoque TEXT NOT NULL
     )
     """
     conexao.commit()
