@@ -128,3 +128,19 @@ def criar_root():
                 "Ativo"
             )
         )
+
+def validar_senha(senha):
+
+    if len(senha) < 8 or len(senha) > 14:
+        return "A senha deve ter de 8 a 14 caracteres."
+
+    if not any(letra.isupper() for letra in senha):
+        return "A senha precisa de no mínimo uma letra maiúscula."
+
+    if not any(letra.islower() for letra in senha):
+        return "A senha precisa de no mínimo uma letra minúscula."
+
+    if not any(numero.isdigit() for numero in senha):
+        return "A senha precisa de no mínimo um número."
+
+    return None
