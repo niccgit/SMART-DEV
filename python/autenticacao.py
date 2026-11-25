@@ -8,10 +8,10 @@ def criar_adm_inicial():
     total = conexao.execute(
         "SELECT COUNT(*) FROM usuarios"
     ).fetchone()[0]
-
-if total > 0:
-    conexao.close()
-    return
+    
+    if total > 0:
+        conexao.close()
+        return
 
 nome = "Administrador"
 email = "root@gmail.com"
@@ -25,20 +25,19 @@ senha_hash = bcrypt.hashpw(
     salt
 )
 
-conexao.execute("""  
-    INSERT INTO usuarios
-    (nome, email, salt, senha_hash, tipo, trocar_senha)
-    VALUES(?,?,?,?,?,?)
-    """,(
-        nome,
-        email,
-        salt.decode,
-        senha_hash.decode,
-        tipo
-))
-
-conexao.commit()
-conexao.close()
+    conexao.execute("""  
+        INSERT INTO usuarios
+        (nome, email, salt, senha_hash, tipo, trocar_senha)
+        VALUES(?,?,?,?,?,?)
+        """,(
+            nome,
+            email,
+            salt.decode,
+            senha_hash.decode,
+            tipo
+    ))
+    conexao.commit()
+    conexao.close()
 
 def verificar_login():
     conexao = conectar()
