@@ -4,12 +4,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
-    letter-spacing: 0.7px;
 }
 :root { 
     --main-color: #CF4845;
     --bg-color: #FAF0E0;
+    --contrast: #FEB43B;
+    --bg-alt: #FFE9C4;
 }
 
 body{
@@ -56,21 +56,68 @@ header nav {
 header div {
     min-width: 356px;
 }
-main {
-    padding: 64px;
-}
 .section1 {
     color: black;
     display: flex;
     flex-direction: row;
+    padding-left: 90px;
+    padding-top: 128px;
+    padding-bottom: 72px;
 }
 .section1 .left-beef {
-    width: 60vw;
+    width: 50vw;
 }
 .left-beef h2 {
     font-size: 60px;
     color: var(--main-color);
+    width: 100%;
+}
+.left-beef p {
+    font-size: 2.25rem;
+    font-weight: 300;
+    width: 100%;
+    text-align: justify;
+}
+.enviar {
+    display: flex;
+    align-items: center;
+    margin-top: 72px;
+}
+.enviar input {
+    font-size: 1rem;
+    border-radius: 0%;
+    border-style: solid;
+    border-color: var(--contrast);
+    padding: 8px;
+    height: 1.5rem;
+    box-sizing: content-box;
+    width: 300px;
+}
+.enviar button {
+    background-color: var(--contrast);
+    display: inline-block;
+    box-sizing: content-box;
+    height: 1.5rem;
+    font-size: 1rem;
+    padding: 8px 16px 8px 16px;
+    border: var(--contrast) solid 2px;
+    font-weight: 700;
 }
 .section1 img {
-
-} 
+    margin-right: 64px;
+    margin-left: auto;
+}
+.section1 span {
+    font-size: 1.5rem;
+    font-weight: 300;
+    width: 60%;
+    display: inline-block;
+}
+.faixa {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    background-color: var(--bg-alt);
+    padding: 1rem;
+    font-size: 1.5rem;
+}
