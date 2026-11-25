@@ -159,6 +159,7 @@ header div {
     width: 590px;
     background-color: var(--contrast);
     margin-left: 128px;
+    border-radius: 20px;
 }
 .separador-vertical {
     margin-top: 300px;
@@ -196,7 +197,7 @@ header div {
     top: 32px;
     left: 50%;
     transform: translateX(-50%);
-    
+    border-radius: 20px;
 }
 .smart {
     width: 100vw;
