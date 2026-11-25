@@ -26,8 +26,6 @@ def criar_tabela_usuarios():
 
     conexao.commit()
     conexao.close()
-    
-# tabela c os dados necessarios para os produtos cadastrados na floricultura
 
     cursor.execute(sql)
     sql = """
