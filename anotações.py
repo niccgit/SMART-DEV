@@ -1,0 +1,1 @@
+# bcrypt = é um hash criptográfico, voltada ao armazenamento seguro de senhas, baseada na cifra Blowfish.
