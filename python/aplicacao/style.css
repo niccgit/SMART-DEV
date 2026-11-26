@@ -195,4 +195,12 @@ header[data-testid="stHeader"] {
     transition: 0.2s;
 }
 .stTextInput div[data-baseweb="input"] button:hover {
-    opa
+    opacity: 1;
+}
+
+.stTextInput div[data-baseweb="input"] button svg {
+    fill: #CF4845 !important;
+    color: #CF4845 !important;
+    width: 18px !important;
+    height: 18px !important;
+}
