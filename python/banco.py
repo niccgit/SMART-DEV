@@ -229,3 +229,47 @@ def atualizar_usuario(id_usuario, nome, setor, situacao, nova_senha=""):
 
         if erro:
             return False, erro
+
+def atualizar_usuario(id_usuario, nome, setor, situacao, nova_senha=""):
+
+    if not nome.strip():
+        return False, "O nome não pode ficar vazio."
+
+    if nova_senha:
+
+        erro = validar_senha(nova_senha)
+
+        if erro:
+            return False, erro
+
+    executar(
+        """
+        UPDATE usuarios
+        SET nome_completo = ?,
+            setor = ?,
+            situacao = ?
+        WHERE id = ?
+        """,
+        (
+            nome.strip(),
+            setor,
+            situacao,
+            id_usuario
+        )
+    )
+
+    if nova_senha:
+
+        executar(
+            """
+            UPDATE usuarios
+            SET senha = ?
+            WHERE id = ?
+            """,
+            (
+                criptografar_senha(nova_senha),
+                id_usuario
+            )
+        )
+
+    return True, "Funcionário atualizado com sucesso!"
