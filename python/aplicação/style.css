@@ -9,3 +9,11 @@
     font-style: italic !important;
     font-weight: 700 !important;
 }
+
+.stApp{
+    background: linear-gradient(135deg, #FAF0E0 0%, #FFE9C4 55%, #FDAA71 100%);
+}
+
+header[data-testid="stHeader"] {
+    background:  linear-gradient(135deg, #FAF0E0 0%, #FFE9C4 55%, #ffba8b 100%) !important;
+}
