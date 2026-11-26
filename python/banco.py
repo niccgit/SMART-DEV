@@ -1,4 +1,3 @@
-
 import sqlite3
 import hashlib
 
@@ -7,12 +6,10 @@ DB_NAME = "floricultura.db"
 email_root = "root@email.com"
 senha_root = "1234"
 
-
 def conectar():
     conexao = sqlite3.connect(DB_NAME)
     conexao.row_factory = sqlite3.Row
     return conexao
-
 
 def consultar(sql, parametros=()):
     conexao = conectar()
@@ -22,7 +19,6 @@ def consultar(sql, parametros=()):
     conexao.close()
     return [dict(linha) for linha in resultado]
 
-
 def executar(sql, parametros=()):
     conexao = conectar()
     cursor = conexao.cursor()
@@ -30,16 +26,13 @@ def executar(sql, parametros=()):
     conexao.commit()
     conexao.close()
 
-
 def criptografar_senha(senha):
     senha = hashlib.sha256(
         senha.encode("utf-8")
     ).hexdigest()
     return senha
 
-
 def criar_tabelas():
-
     executar("""
         CREATE TABLE IF NOT EXISTS usuarios (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,7 +44,6 @@ def criar_tabelas():
             situacao TEXT NOT NULL DEFAULT 'Ativo'
         )
     """)
-
     executar("""
         CREATE TABLE IF NOT EXISTS movimentacoes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,7 +53,6 @@ def criar_tabelas():
             valor REAL NOT NULL
         )
     """)
-
     executar("""
         CREATE TABLE IF NOT EXISTS pagamentos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -72,7 +63,6 @@ def criar_tabelas():
             status TEXT NOT NULL DEFAULT 'Pendente'
         )
     """)
-
     executar("""
         CREATE TABLE IF NOT EXISTS pedidos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -90,7 +80,6 @@ def criar_tabelas():
             status TEXT NOT NULL DEFAULT 'Pendente'
         )
     """)
-
     executar("""
         CREATE TABLE IF NOT EXISTS produtos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -105,175 +94,125 @@ def criar_tabelas():
             situacao TEXT NOT NULL DEFAULT 'Ativo'
         )
     """)
-
+    executar("""
+        CREATE TABLE IF NOT EXISTS movimentacoes_estoque (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            produto_id INTEGER NOT NULL,
+            tipo TEXT NOT NULL,
+            quantidade INTEGER NOT NULL,
+            motivo TEXT,
+            data TEXT NOT NULL,
+            FOREIGN KEY (produto_id) REFERENCES produtos(id)
+        )
+    """)
     criar_root()
 
-
 def criar_root():
-
     usuario = consultar(
         "SELECT * FROM usuarios WHERE email_corporativo = ?",
         (email_root,)
     )
-
     if len(usuario) == 0:
-        executar(
-            """
+        executar("""
             INSERT INTO usuarios
             (nome_completo, cpf, setor, email_corporativo, senha, situacao)
             VALUES (?, ?, ?, ?, ?, ?)
-            """,
-            (
-                "Root",
-                "000.000.000-00",
-                "Administração",
-                email_root,
-                criptografar_senha(senha_root),
-                "Ativo"
-            )
-        )
-
+        """, (
+            "Root",
+            "000.000.000-00",
+            "Administração",
+            email_root,
+            criptografar_senha(senha_root),
+            "Ativo"
+        ))
 
 def validar_senha(senha):
-
     if len(senha) < 8 or len(senha) > 14:
         return "A senha deve ter de 8 a 14 caracteres."
-
     if not any(letra.isupper() for letra in senha):
         return "A senha precisa de no mínimo uma letra maiúscula."
-
     if not any(letra.islower() for letra in senha):
         return "A senha precisa de no mínimo uma letra minúscula."
-
     if not any(numero.isdigit() for numero in senha):
         return "A senha precisa de no mínimo um número."
-
     return None
 
-
 def buscar_usuario_login(email, senha):
-
     senha = criptografar_senha(senha)
-
-    usuario = consultar(
-        """
+    usuario = consultar("""
         SELECT id, nome_completo, cpf, setor,
                email_corporativo, situacao
         FROM usuarios
         WHERE email_corporativo = ? COLLATE NOCASE
         AND senha = ?
         AND situacao = 'Ativo'
-        """,
-        (email.strip(), senha)
-    )
-
+    """, (email.strip(), senha))
     if len(usuario) > 0:
         return usuario[0]
-
     return None
 
-
 def listar_usuarios():
-
-    usuarios = consultar(
-        """
+    usuarios = consultar("""
         SELECT id, nome_completo, cpf, setor,
                email_corporativo, situacao
         FROM usuarios
         ORDER BY id
-        """
-    )
-
+    """)
     return usuarios
 
-
 def cadastrar_usuario(nome, cpf, setor, email, senha):
-
     nome = nome.strip()
     cpf = cpf.strip()
     email = email.strip()
-
     if not nome or not cpf or not setor or not email or not senha:
         return False, "Preencha todos os campos."
-
     erro = validar_senha(senha)
-
     if erro:
         return False, erro
-
     cpf_existente = consultar(
         "SELECT id FROM usuarios WHERE cpf = ?",
         (cpf,)
     )
-
     if len(cpf_existente) > 0:
         return False, "Esse CPF já está cadastrado."
-
     email_existente = consultar(
         "SELECT id FROM usuarios WHERE email_corporativo = ?",
         (email,)
     )
-
     if len(email_existente) > 0:
         return False, "Esse e-mail já está cadastrado."
-
-    executar(
-        """
+    executar("""
         INSERT INTO usuarios
         (nome_completo, cpf, setor, email_corporativo, senha, situacao)
         VALUES (?, ?, ?, ?, ?, ?)
-        """,
-        (
-            nome,
-            cpf,
-            setor,
-            email,
-            criptografar_senha(senha),
-            "Ativo"
-        )
-    )
-
+    """, (
+        nome,
+        cpf,
+        setor,
+        email,
+        criptografar_senha(senha),
+        "Ativo"
+    ))
     return True, "Funcionário cadastrado com sucesso!"
 
-
 def atualizar_usuario(id_usuario, nome, setor, situacao, nova_senha=""):
-
     if not nome.strip():
         return False, "O nome não pode ficar vazio."
-
     if nova_senha:
         erro = validar_senha(nova_senha)
-
         if erro:
             return False, erro
-
-    executar(
-        """
+    executar("""
         UPDATE usuarios
         SET nome_completo = ?,
             setor = ?,
             situacao = ?
         WHERE id = ?
-        """,
-        (
-            nome.strip(),
-            setor,
-            situacao,
-            id_usuario
-        )
-    )
-
+    """, (nome.strip(), setor, situacao, id_usuario))
     if nova_senha:
-        executar(
-            """
+        executar("""
             UPDATE usuarios
             SET senha = ?
             WHERE id = ?
-            """,
-            (
-                criptografar_senha(nova_senha),
-                id_usuario
-            )
-        )
-
+        """, (criptografar_senha(nova_senha), id_usuario))
     return True, "Funcionário atualizado com sucesso!"
