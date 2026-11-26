@@ -182,6 +182,56 @@ def gerenciar_funcionarios(usuario_logado):
         for usuario in usuarios
     }
 
+    id_selecionado = st.selectbox(
+        "Selecione um funcionário",
+        list(opcoes_usuarios.keys()),
+        format_func=lambda id: opcoes_usuarios[id]
+    )
+
+    usuario_selecionado = next(
+        usuario for usuario in usuarios
+        if usuario["id"] == id_selecionado
+    )
+
+    proprio_usuario = (
+        id_selecionado == usuario_logado["id"]
+    )
+
+    st.subheader("Editar funcionário")
+
+    with st.form("form_editar_funcionario"):
+
+        nome = st.text_input(
+            "Nome completo",
+            value=usuario_selecionado["nome_completo"]
+        )
+
+        setor = st.selectbox(
+            "Setor",
+            SETORES,
+            index=SETORES.index(usuario_selecionado["setor"]),
+            disabled=proprio_usuario
+        )
+
+        situacao = st.selectbox(
+            "Situação",
+            ["Ativo", "Inativo"],
+            index=["Ativo", "Inativo"].index(
+                usuario_selecionado["situacao"]
+            ),
+            disabled=proprio_usuario
+        )
+
+        nova_senha = st.text_input(
+            "Nova senha (deixe vazio para manter a atual)",
+            type="password"
+        )
+
+        atualizar = st.form_submit_button(
+            "Salvar alterações"
+        )
+
+
 def abrir_tela(nome_tela, usuario):
 
     if nome_tela == "Cadastrar funcionário":
