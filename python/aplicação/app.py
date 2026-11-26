@@ -161,7 +161,7 @@ else:
             with col1:
                 cpf = st.text_input("CPF*", max_chars=14)
             with col2:
-                setor = st.selectbox("SETOR*", ["Selecione o setor"] + list(ESTRUTURA_SETORES.keys()))
+                setor = st.selectbox("SETOR*", ["Selecione o setor"] + list(estrutura_setores.keys()))
             col3, col4 = st.columns(2)
             with col3:
                 email = st.text_input("E-MAIL CORPORATIVO*")
@@ -169,4 +169,14 @@ else:
                 senha = st.text_input("SENHA*", type="password")
             st.caption("A senha deve ter de 8 a 16 caracteres, com no mínimo 1 minúscula, 1 maiúscula e 1 número.")
 
+            if st.form_submit_button("Cadastrar"):
+                ok, msg = validar_senha(senha)
+                if not nome or not cpf or setor == "Selecione o setor" or not email or not senha:
+                    st.error("Preencha todos os campos obrigatórios (*).")
+                elif not ok:
+                    st.error(msg)
+                else:
+                    st.session_state.funcionarios.append({
+                        "Nome": nome, "CPF": cpf, "Setor": setor, "Email": email, "Senha": senha
+                    })
 
