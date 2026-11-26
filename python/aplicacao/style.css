@@ -17,3 +17,16 @@
 header[data-testid="stHeader"] {
     background:  linear-gradient(135deg, #FAF0E0 0%, #FFE9C4 55%, #ffba8b 100%) !important;
 }
+
+[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login) {
+    gap: 0px !important;
+    align-items: stretch !important;
+    border-radius: 22px !important;
+    overflow: hidden !important;
+    background-color: linear-gradient(135deg, #FAF0E0 0%, #FFE9C4 55%, #FDAA71 100%) !important;
+}
+
+
+[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login) > [data-testid="column"] {
+    padding: 0px !important;
+}
