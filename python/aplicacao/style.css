@@ -50,3 +50,16 @@ header[data-testid="stHeader"] {
     flex-direction: column;
     justify-content: space-between;
 }
+
+.cantos-ornamento {
+    display: flex;
+    justify-content: space-between;
+    color: #FFE9C4;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.conteudo-esquerdo-centro {
+    text-align: center;
+    padding: 10px 0;
+}
