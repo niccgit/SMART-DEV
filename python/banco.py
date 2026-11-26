@@ -216,3 +216,32 @@ def atualizar_usuario(id_usuario, nome, setor, situacao, nova_senha=""):
             WHERE id = ?
         """, (criptografar_senha(nova_senha), id_usuario))
     return True, "Funcionário atualizado com sucesso!"
+
+def listar_pedidos_montagem():
+    return consultar("""
+        SELECT *
+        FROM pedidos
+        ORDER BY id
+    """)
+
+
+def atualizar_status_pedido(id_pedido, novo_status):
+    status_permitidos = [
+        "Pendente",
+        "Em progresso",
+        "Finalizado"
+    ]
+    if novo_status not in status_permitidos:
+        return False, "Status inválido."
+    pedido = consultar(
+        "SELECT id FROM pedidos WHERE id = ?",
+        (id_pedido,)
+    )
+    if not pedido:
+        return False, "Pedido não encontrado."
+    executar("""
+        UPDATE pedidos
+        SET status = ?
+        WHERE id = ?
+    """, (novo_status, id_pedido))
+    return True, "Status do pedido atualizado com sucesso!"
