@@ -218,3 +218,14 @@ def cadastrar_usuario(nome, cpf, setor, email, senha):
         )
     )
     return True, "Funcionário cadastrado com sucesso!"
+
+def atualizar_usuario(id_usuario, nome, setor, situacao, nova_senha=""):
+
+    if not nome.strip():
+        return False, "O nome não pode ficar vazio."
+
+    if nova_senha:
+        erro = validar_senha(nova_senha)
+
+        if erro:
+            return False, erro
