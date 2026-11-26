@@ -110,6 +110,21 @@ def mostrar_menu(usuario, telas_permitidas):
         st.session_state.tela
     )
 
+    tela_selecionada = st.sidebar.radio(
+        "Menu",
+        telas_permitidas,
+        index=indice
+    )
+
+    st.session_state.tela = tela_selecionada
+    st.sidebar.divider()
+    if st.sidebar.button("Sair"):
+
+        st.session_state.usuario_logado = None
+        st.session_state.tela = None
+
+        st.rerun()
+
 
 def abrir_tela(nome_tela, usuario):
 
