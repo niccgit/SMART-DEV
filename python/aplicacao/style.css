@@ -14,11 +14,11 @@
     background: linear-gradient(135deg, #FAF0E0 0%, #FFE9C4 55%, #FDAA71 100%);
 }
 
-header[data-testid="stHeader"] {
+header[data-testid="stHeader"]{
     background:  linear-gradient(135deg, #FAF0E0 0%, #FFE9C4 55%, #ffba8b 100%) !important;
 }
 
-[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login) {
+[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login){
     gap: 0px !important;
     align-items: stretch !important;
     border-radius: 22px !important;
@@ -26,11 +26,11 @@ header[data-testid="stHeader"] {
     background-color: linear-gradient(135deg, #FAF0E0 0%, #FFE9C4 55%, #FDAA71 100%) !important;
 }
 
-[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login) > [data-testid="column"] {
+[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login) > [data-testid="column"]{
     padding: 0px !important;
 }
 
-.painel-esquerdo-login {
+.painel-esquerdo-login{
     background: linear-gradient(180deg, #CF4845 0%, #FF8987 100%);
     height: 100%;
     min-height: 510px;
@@ -40,8 +40,7 @@ header[data-testid="stHeader"] {
     justify-content: space-between;
 }
 
-
-.moldura-interna-esq {
+.moldura-interna-esq{
     border: 1px solid rgba(255, 233, 196, 0.35);
     border-radius: 12px;
     height: 100%;
@@ -51,7 +50,7 @@ header[data-testid="stHeader"] {
     justify-content: space-between;
 }
 
-.cantos-ornamento {
+.cantos-ornamento{
     display: flex;
     justify-content: space-between;
     color: #FFE9C4;
@@ -59,19 +58,19 @@ header[data-testid="stHeader"] {
     line-height: 1;
 }
 
-.conteudo-esquerdo-centro {
+.conteudo-esquerdo-centro{
     text-align: center;
     padding: 10px 0;
 }
 
-.titulo-marca-login {
+.titulo-marca-login{
     color: #FFE9C4 !important;
     font-size: 36px !important;
     font-weight: 700 !important;
     margin: 0 0 12px 0 !important;
 }
 
-.texto-boas-vindas {
+.texto-boas-vindas{
     color: #FFE9C4 !important;
     font-size: 14.5px !important;
     font-weight: 400 !important;
@@ -80,7 +79,7 @@ header[data-testid="stHeader"] {
     margin: 0 auto 26px auto !important;
 }
 
-.circulo-flor-destaque {
+.circulo-flor-destaque{
     width: 180px;
     height: 180px;
     border-radius: 50%;
@@ -94,13 +93,13 @@ header[data-testid="stHeader"] {
     justify-content: center;
 }
 
-.circulo-flor-destaque img {
+.circulo-flor-destaque img{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login) [data-testid="stForm"] {
+[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login) [data-testid="stForm"]{
     background-color: #FAF0E0 !important;
     border: none !important;
     border-radius: 0px !important;
@@ -113,7 +112,7 @@ header[data-testid="stHeader"] {
     justify-content: space-between;
 }
 
-.cantos-ornamento-dir {
+.cantos-ornamento-dir{
     display: flex;
     justify-content: space-between;
     color: #F68324;
@@ -121,19 +120,19 @@ header[data-testid="stHeader"] {
     line-height: 1;
 }
 
-.cabecalho-form-login {
+.cabecalho-form-login{
     text-align: center;
     margin: 8px 0 18px 0;
 }
 
-.titulo-login-direito {
+.titulo-login-direito{
     color: #CF4845 !important;
     font-size: 34px !important;
     font-weight: 700 !important;
     margin: 0 !important;
 }
 
-.divisor-asterisco {
+.divisor-asterisco{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,7 +141,7 @@ header[data-testid="stHeader"] {
     font-size: 16px;
     margin-top: 4px;
 }
-.divisor-asterisco span.linha {
+.divisor-asterisco span.linha{
     width: 60px;
     height: 1px;
     background-color: rgba(246, 131, 36, 0.45);
@@ -156,7 +155,7 @@ header[data-testid="stHeader"] {
     margin-bottom: 2px !important;
 }
 
-.stTextInput div[data-baseweb="input"] {
+.stTextInput div[data-baseweb="input"]{
     background-color: rgba(255, 233, 196, 0.55) !important;
     border: none !important;
     border-bottom: 2.5px solid #F68324 !important;
@@ -164,7 +163,7 @@ header[data-testid="stHeader"] {
     padding: 2px 6px !important;
     transition: all 0.25s ease !important;
 }
-.stTextInput div[data-baseweb="input"]:focus-within {
+.stTextInput div[data-baseweb="input"]:focus-within{
     background-color: #FFE9C4 !important;
     border-bottom: 2.5px solid #CF4845 !important;
 }
@@ -172,7 +171,7 @@ header[data-testid="stHeader"] {
 .stTextInput div[data-baseweb="base-input"],
 .stTextInput input,
 .stTextInput div[data-baseweb="input"] > div,
-.stTextInput div[data-baseweb="input"] button {
+.stTextInput div[data-baseweb="input"] button{
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
@@ -180,38 +179,38 @@ header[data-testid="stHeader"] {
     -webkit-text-fill-color: #000000 !important;
 }
 
-.stTextInput input {
+.stTextInput input{
     padding: 10px 8px !important;
     font-size: 15px !important;
 }
 
-.stTextInput input::placeholder {
+.stTextInput input::placeholder{
     color: #9A7B6A !important;
     -webkit-text-fill-color: #9A7B6A !important;
 }
 
-.stTextInput div[data-baseweb="input"] button {
+.stTextInput div[data-baseweb="input"] button{
     opacity: 0.75;
     transition: 0.2s;
 }
-.stTextInput div[data-baseweb="input"] button:hover {
+.stTextInput div[data-baseweb="input"] button:hover{
     opacity: 1;
 }
 
-.stTextInput div[data-baseweb="input"] button svg {
+.stTextInput div[data-baseweb="input"] button svg{
     fill: #CF4845 !important;
     color: #CF4845 !important;
     width: 18px !important;
     height: 18px !important;
 }
 
-div.stFormSubmitButton {
+div.stFormSubmitButton{
     display: flex !important;
     justify-content: center !important;
     margin-top: 22px !important;
 }
 
-div.stFormSubmitButton > button {
+div.stFormSubmitButton > button{
     background-color: #CF4845 !important;
     color: #FFE9C4 !important;
     border-radius: 25px !important;
@@ -222,12 +221,12 @@ div.stFormSubmitButton > button {
     transition: 0.2s ease;
 }
 
-div.stFormSubmitButton > button:hover {
+div.stFormSubmitButton > button:hover{
     background-color: #F87557 !important;
     color: #000000 !important;
 }
 
-.rodape-esqueceu-senha {
+.rodape-esqueceu-senha{
     text-align: center;
     font-size: 12.5px;
     color: #5C4B48;
