@@ -1,3 +1,4 @@
+
 import sqlite3
 import hashlib
 
@@ -12,6 +13,7 @@ def conectar():
     conexao.row_factory = sqlite3.Row
     return conexao
 
+
 def consultar(sql, parametros=()):
     conexao = conectar()
     cursor = conexao.cursor()
@@ -20,6 +22,7 @@ def consultar(sql, parametros=()):
     conexao.close()
     return [dict(linha) for linha in resultado]
 
+
 def executar(sql, parametros=()):
     conexao = conectar()
     cursor = conexao.cursor()
@@ -27,11 +30,13 @@ def executar(sql, parametros=()):
     conexao.commit()
     conexao.close()
 
+
 def criptografar_senha(senha):
     senha = hashlib.sha256(
         senha.encode("utf-8")
     ).hexdigest()
     return senha
+
 
 def criar_tabelas():
 
@@ -101,9 +106,9 @@ def criar_tabelas():
         )
     """)
 
-""")
-
     criar_root()
+
+
 def criar_root():
 
     usuario = consultar(
@@ -128,6 +133,7 @@ def criar_root():
             )
         )
 
+
 def validar_senha(senha):
 
     if len(senha) < 8 or len(senha) > 14:
@@ -144,9 +150,11 @@ def validar_senha(senha):
 
     return None
 
-def buscar_usuarios(email, senha):
+
+def buscar_usuario_login(email, senha):
 
     senha = criptografar_senha(senha)
+
     usuario = consultar(
         """
         SELECT id, nome_completo, cpf, setor,
@@ -158,9 +166,12 @@ def buscar_usuarios(email, senha):
         """,
         (email.strip(), senha)
     )
+
     if len(usuario) > 0:
         return usuario[0]
+
     return None
+
 
 def listar_usuarios():
 
@@ -172,7 +183,9 @@ def listar_usuarios():
         ORDER BY id
         """
     )
+
     return usuarios
+
 
 def cadastrar_usuario(nome, cpf, setor, email, senha):
 
@@ -192,6 +205,7 @@ def cadastrar_usuario(nome, cpf, setor, email, senha):
         "SELECT id FROM usuarios WHERE cpf = ?",
         (cpf,)
     )
+
     if len(cpf_existente) > 0:
         return False, "Esse CPF já está cadastrado."
 
@@ -199,6 +213,7 @@ def cadastrar_usuario(nome, cpf, setor, email, senha):
         "SELECT id FROM usuarios WHERE email_corporativo = ?",
         (email,)
     )
+
     if len(email_existente) > 0:
         return False, "Esse e-mail já está cadastrado."
 
@@ -217,18 +232,9 @@ def cadastrar_usuario(nome, cpf, setor, email, senha):
             "Ativo"
         )
     )
+
     return True, "Funcionário cadastrado com sucesso!"
 
-def atualizar_usuario(id_usuario, nome, setor, situacao, nova_senha=""):
-
-    if not nome.strip():
-        return False, "O nome não pode ficar vazio."
-
-    if nova_senha:
-        erro = validar_senha(nova_senha)
-
-        if erro:
-            return False, erro
 
 def atualizar_usuario(id_usuario, nome, setor, situacao, nova_senha=""):
 
@@ -236,7 +242,6 @@ def atualizar_usuario(id_usuario, nome, setor, situacao, nova_senha=""):
         return False, "O nome não pode ficar vazio."
 
     if nova_senha:
-
         erro = validar_senha(nova_senha)
 
         if erro:
@@ -259,7 +264,6 @@ def atualizar_usuario(id_usuario, nome, setor, situacao, nova_senha=""):
     )
 
     if nova_senha:
-
         executar(
             """
             UPDATE usuarios
