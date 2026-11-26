@@ -161,6 +161,27 @@ def cadastrar_funcionario():
                 st.error(mensagem)
 
 
+def gerenciar_funcionarios(usuario_logado):
+
+    st.title("Gerenciar funcionários")
+
+    usuarios = banco.listar_usuarios()
+
+    if len(usuarios) == 0:
+        st.info("Nenhum funcionário cadastrado.")
+        return
+
+    st.subheader("Funcionários cadastrados")
+    st.dataframe(
+        usuarios,
+        use_container_width=True
+    )
+
+    opcoes_usuarios = {
+        usuario["id"]: usuario["nome_completo"]
+        for usuario in usuarios
+    }
+
 def abrir_tela(nome_tela, usuario):
 
     if nome_tela == "Cadastrar funcionário":
