@@ -33,3 +33,9 @@ if "funcionarios" not in st.session_state:
         {"Nome": "Pedro (Estoque)", "CPF": "555.555.555-55", "Setor": "Estoque", "Email": "estoque@flor.com", "Senha": "Estoq123"},
         {"Nome": "Marcos (Montagem)", "CPF": "666.666.666-66", "Setor": "Montagem", "Email": "montagem@flor.com", "Senha": "Monta123"}
     ]
+
+if "usuario_logado" not in st.session_state:
+    st.session_state.usuario_logado = None
+
+if "tela_atual" not in st.session_state:
+    st.session_state.tela_atual = None
