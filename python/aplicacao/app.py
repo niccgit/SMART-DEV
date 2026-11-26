@@ -225,18 +225,34 @@ else:
         else:
             st.info("Não há outros funcionários para remover.")
     
+    elif tela == "Movimentações":
+        st.header("Movimentações")
+
+    elif tela == "Pagamentos":
+        st.header("Pagamentos")
+
+    elif tela == "Cadastrar novo pedido":
+        st.header("Cadastrar novo pedido")
+
+    elif tela == "Consultar Pedidos":
+        st.header("Consultar pedidos")
+
+    elif tela == "Catálogo de produtos":
+        st.header("Catálogo de produtos")
+
+    elif tela == "Estoque":
+        st.header("Visão de estoque")     
+
     elif tela == "Fila de montagem":
         st.header("Fila de montagem")
+        col1, col2 = st.columns(2)
 
-        st.button("Pedido 01")
-        st.button("Pedido 02")
-        st.button("Pedido 03")
-        st.button("Pedido 04")
-        st.button("Pedido 05")
-        st.button("Pedido 06")
+        with col1:
+            st.button('Botão 1')
 
+        with col2:
+            st.button('Botão 2')
+            
     else:
         st.header(tela)
         st.info("calma aí paizao, jaja os caba chega nas proximas telas")
-
-
