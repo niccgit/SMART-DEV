@@ -20,7 +20,6 @@ setores = [
     "Montagem"
 ]
 
-
 telas_por_setor = {
 
     "Administração": [
@@ -57,3 +56,49 @@ telas_por_setor = {
         "Fila de montagem"
     ]
 }
+
+if "usuario_logado" not in st.session_state:
+    st.session_state.usuario_logado = None
+
+if "tela" not in st.session_state:
+    st.session_state.tela = None
+
+
+def abrir_tela(nome_tela, usuario):
+
+    if nome_tela == "Cadastrar funcionário":
+        cadastrar_funcionario()
+
+    elif nome_tela == "Gerenciar funcionários":
+        gerenciar_funcionarios(usuario)
+
+    elif nome_tela == "Movimentações":
+        from telas import financeiro
+        financeiro.mostrar_movimentacoes()
+
+    elif nome_tela == "Pagamentos":
+        from telas import financeiro
+        financeiro.mostrar_pagamentos()
+
+    elif nome_tela == "Cadastrar pedido":
+        from telas import atendimento
+        atendimento.cadastrar_pedido()
+
+    elif nome_tela == "Consultar pedidos":
+        from telas import atendimento
+        atendimento.consultar_pedidos()
+
+    elif nome_tela == "Catálogo de produtos":
+        from telas import ecommerce
+        ecommerce.mostrar_catalogo()
+
+    elif nome_tela == "Estoque":
+        from telas import estoque
+        estoque.mostrar_estoque()
+
+    elif nome_tela == "Fila de montagem":
+        from telas import montagem
+        montagem.mostrar_fila()
+
+    else:
+        st.error("Tela não encontrada.")
