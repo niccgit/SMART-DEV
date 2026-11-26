@@ -289,3 +289,34 @@ def abrir_tela(nome_tela, usuario):
 
     else:
         st.error("Tela não encontrada.")
+
+
+def main():
+
+    usuario = st.session_state.usuario_logado
+
+    if usuario is None:
+        mostrar_login()
+
+    else:
+        setor = usuario["setor"]
+        telas_permitidas = TELAS_POR_SETOR.get(
+            setor,
+            []
+        )
+
+        if not telas_permitidas:
+            st.error("Não existem telas disponíveis para este setor.")
+            return
+
+        mostrar_menu(
+            usuario,
+            telas_permitidas
+        )
+        abrir_tela(
+            st.session_state.tela,
+            usuario
+        )
+
+
+main()
