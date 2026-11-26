@@ -184,3 +184,37 @@ def cadastrar_usuario(nome, cpf, setor, email, senha):
         return False, "Preencha todos os campos."
 
     erro = validar_senha(senha)
+
+    if erro:
+        return False, erro
+
+    cpf_existente = consultar(
+        "SELECT id FROM usuarios WHERE cpf = ?",
+        (cpf,)
+    )
+    if len(cpf_existente) > 0:
+        return False, "Esse CPF já está cadastrado."
+
+    email_existente = consultar(
+        "SELECT id FROM usuarios WHERE email_corporativo = ?",
+        (email,)
+    )
+    if len(email_existente) > 0:
+        return False, "Esse e-mail já está cadastrado."
+
+    executar(
+        """
+        INSERT INTO usuarios
+        (nome_completo, cpf, setor, email_corporativo, senha, situacao)
+        VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        (
+            nome,
+            cpf,
+            setor,
+            email,
+            criptografar_senha(senha),
+            "Ativo"
+        )
+    )
+    return True, "Funcionário cadastrado com sucesso!"
