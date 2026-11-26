@@ -112,3 +112,23 @@ header[data-testid="stHeader"] {
     flex-direction: column;
     justify-content: space-between;
 }
+
+.cantos-ornamento-dir {
+    display: flex;
+    justify-content: space-between;
+    color: #F68324;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.cabecalho-form-login {
+    text-align: center;
+    margin: 8px 0 18px 0;
+}
+
+.titulo-login-direito {
+    color: #CF4845 !important;
+    font-size: 34px !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
