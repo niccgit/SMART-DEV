@@ -280,3 +280,18 @@ def listar_produtos_estoque():
         WHERE situacao = 'Ativo'
         ORDER BY nome
     """)
+
+def registrar_entrada_estoque(id_produto, quantidade):
+    if quantidade <= 0:
+        return False, "Informe uma quantidade maior que zero."
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute("""
+        SELECT id
+        FROM produtos
+        WHERE id = ? AND situacao = 'Ativo'
+    """, (id_produto,))
+    produto = cursor.fetchone()
+    if produto is None:
+        conexao.close()
+        return False, "Produto não encontrado ou inativo."
