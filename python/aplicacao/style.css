@@ -147,3 +147,11 @@ header[data-testid="stHeader"] {
     height: 1px;
     background-color: rgba(246, 131, 36, 0.45);
 }
+
+[data-testid="stForm"] label p {
+    color: #CF4845 !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.6px;
+    margin-bottom: 2px !important;
+}
