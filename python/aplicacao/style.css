@@ -79,3 +79,23 @@ header[data-testid="stHeader"] {
     max-width: 290px;
     margin: 0 auto 26px auto !important;
 }
+
+.circulo-flor-destaque {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-color: #FAF0E0;
+    border: 4px solid #FFE9C4;
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.16);
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circulo-flor-destaque img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
