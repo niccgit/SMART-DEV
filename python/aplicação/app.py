@@ -1,44 +1,22 @@
 import streamlit as st
 import re
+import os
 import pandas as pd
 import base64
 
 st.set_page_config(page_title="Com carinho, Flor - Sistema", layout="wide")
 
 def carregar_css(nome_arquivo):
-    with open(nome_arquivo, "r", encoding="utf-8") as arquivo:
-        st.markdown(f"<style>{arquivo.read()}</style>", unsafe_allow_html=True)
+    if os.path.exists(nome_arquivo):
+        with open(nome_arquivo, "r", encoding="utf-8") as arquivo:
+            st.markdown(f"<style>{arquivo.read()}</style>", unsafe_allow_html=True)
+
 
 def carregar_imagem_base64(caminho_imagem):
+    if not os.path.exists(caminho_imagem):
+        return ""
     with open(caminho_imagem, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
-
-logo_base64 = carregar_imagem_base64("Logo Com carinho, Flor.jpg")
-
-estrutura_setores = {
-    "Administração": ["Cadastrar funcionário", "Gerenciar usuários"],
-    "Financeiro": ["Movimentações", "Pagamentos"],
-    "Atendimento ao Cliente": ["Cadastrar novo pedido", "Consultar Pedidos"],
-    "Gestão de E-commerce": ["Catálogo de produtos"],
-    "Estoque": ["Estoque"],
-    "Montagem": ["Fila de montagem"]
-}
-
-if "funcionarios" not in st.session_state:
-    st.session_state.funcionarios = [
-        {"Nome": "Giovanna (Admin)", "CPF": "111.111.111-11", "Setor": "Administração", "Email": "admin@flor.com", "Senha": "Admin123"},
-        {"Nome": "Ana (Financeiro)", "CPF": "222.222.222-22", "Setor": "Financeiro", "Email": "fin@flor.com", "Senha": "Finan123"},
-        {"Nome": "Lucas (Atendimento)", "CPF": "333.333.333-33", "Setor": "Atendimento ao Cliente", "Email": "atend@flor.com", "Senha": "Atend123"},
-        {"Nome": "Carla (E-commerce)", "CPF": "444.444.444-44", "Setor": "Gestão de E-commerce", "Email": "ecom@flor.com", "Senha": "Ecom1234"},
-        {"Nome": "Pedro (Estoque)", "CPF": "555.555.555-55", "Setor": "Estoque", "Email": "estoque@flor.com", "Senha": "Estoq123"},
-        {"Nome": "Marcos (Montagem)", "CPF": "666.666.666-66", "Setor": "Montagem", "Email": "montagem@flor.com", "Senha": "Monta123"}
-    ]
-
-if "usuario_logado" not in st.session_state:
-    st.session_state.usuario_logado = None
-
-if "tela_atual" not in st.session_state:
-    st.session_state.tela_atual = None
 
 def validar_senha(senha):
     if len(senha) < 8 or len(senha) > 16:
@@ -51,17 +29,54 @@ def validar_senha(senha):
         return False, "Falta pelo menos 1 número."
     return True, "Ok"
 
+def validar_email(email):
+    return re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email) is not None
+
+
+def validar_cpf(cpf):
+    return re.fullmatch(r"\d{3}\.\d{3}\.\d{3}-\d{2}", cpf) is not None
+
 def autenticar_usuario(email, senha):
+    email = email.strip().lower()
     for func in st.session_state.funcionarios:
-        if func["Email"] == email and func["Senha"] == senha:
+        if func["Email"].lower() == email and func["Senha"] == senha:
             return func
     return None
 
+logo_base64 = carregar_imagem_base64("logo.jpg")
+
+estrutura_setores = {
+    "Administração": ["Cadastrar funcionário", "Gerenciar usuários"],
+    "Financeiro": ["Movimentações", "Pagamentos"],
+    "Atendimento ao Cliente": ["Cadastrar novo pedido", "Consultar Pedidos"],
+    "Gestão de E-commerce": ["Catálogo de produtos"],
+    "Estoque": ["Estoque"],
+    "Montagem": ["Fila de montagem"],
+}
+
+if "funcionarios" not in st.session_state:
+    st.session_state.funcionarios = [
+        {"Nome": "Giovanna (Admin)", "CPF": "111.111.111-11", "Setor": "Administração", "Email": "admin@flor.com", "Senha": "Admin123"},
+        {"Nome": "Ana (Financeiro)", "CPF": "222.222.222-22", "Setor": "Financeiro", "Email": "fin@flor.com", "Senha": "Finan123"},
+        {"Nome": "Lucas (Atendimento)", "CPF": "333.333.333-33", "Setor": "Atendimento ao Cliente", "Email": "atend@flor.com", "Senha": "Atend123"},
+        {"Nome": "Carla (E-commerce)", "CPF": "444.444.444-44", "Setor": "Gestão de E-commerce", "Email": "ecom@flor.com", "Senha": "Ecom1234"},
+        {"Nome": "Pedro (Estoque)", "CPF": "555.555.555-55", "Setor": "Estoque", "Email": "estoque@flor.com", "Senha": "Estoq123"},
+        {"Nome": "Marcos (Montagem)", "CPF": "666.666.666-66", "Setor": "Montagem", "Email": "montagem@flor.com", "Senha": "Monta123"},
+    ]
+
+if "usuario_logado" not in st.session_state:
+    st.session_state.usuario_logado = None
+
+if "tela_atual" not in st.session_state:
+    st.session_state.tela_atual = None
+
+carregar_css("style.css")
+
 if st.session_state.usuario_logado is None:
-    carregar_css("style.css")
     margem_esq, centro, margem_dir = st.columns([0.5, 3.4, 0.5])
     with centro:
         lado_esq, lado_dir = st.columns([1, 1.05], gap="small")
+
         with lado_esq:
             st.markdown(f"""
                 <div class="painel-esquerdo-login">
@@ -80,6 +95,7 @@ if st.session_state.usuario_logado is None:
                     </div>
                 </div>
             """, unsafe_allow_html=True)
+
         with lado_dir:
             with st.form("form_login"):
                 st.markdown("""
@@ -102,12 +118,12 @@ if st.session_state.usuario_logado is None:
                     </div>
                     <div class="cantos-ornamento-dir"><span>❖</span><span>❖</span></div>
                 """, unsafe_allow_html=True)
+
                 if btn_entrar:
                     usuario = autenticar_usuario(email_input, senha_input)
                     if usuario:
                         st.session_state.usuario_logado = usuario
-                        setor_do_usuario = usuario["Setor"]
-                        st.session_state.tela_atual = estrutura_setores[setor_do_usuario][0]
+                        st.session_state.tela_atual = estrutura_setores[usuario["Setor"]][0]
                         st.rerun()
                     else:
                         st.error("E-mail ou senha inválidos.")
@@ -136,10 +152,10 @@ else:
         else:
             setores_permitidos = [setor_usuario]
 
-        for setor in setores_permitidos:
-            aberto = (st.session_state.tela_atual in estrutura_setores[setor])
-            with st.expander(setor.upper(), expanded=aberto):
-                for pagina in estrutura_setores[setor]:
+        for setor_menu in setores_permitidos:
+            aberto = st.session_state.tela_atual in estrutura_setores[setor_menu]
+            with st.expander(setor_menu.upper(), expanded=aberto):
+                for pagina in estrutura_setores[setor_menu]:
                     tipo = "primary" if st.session_state.tela_atual == pagina else "secondary"
                     if st.button(pagina, key=f"nav_{pagina}", use_container_width=True, type=tipo):
                         st.session_state.tela_atual = pagina
@@ -159,9 +175,9 @@ else:
             nome = st.text_input("NOME COMPLETO*")
             col1, col2 = st.columns(2)
             with col1:
-                cpf = st.text_input("CPF*", max_chars=14)
+                cpf = st.text_input("CPF*", max_chars=14, placeholder="000.000.000-00")
             with col2:
-                setor = st.selectbox("SETOR*", ["Selecione o setor"] + list(estrutura_setores.keys()))
+                setor_cad = st.selectbox("SETOR*", ["Selecione o setor"] + list(estrutura_setores.keys()))
             col3, col4 = st.columns(2)
             with col3:
                 email = st.text_input("E-MAIL CORPORATIVO*")
@@ -170,13 +186,47 @@ else:
             st.caption("A senha deve ter de 8 a 16 caracteres, com no mínimo 1 minúscula, 1 maiúscula e 1 número.")
 
             if st.form_submit_button("Cadastrar"):
-                ok, msg = validar_senha(senha)
-                if not nome or not cpf or setor == "Selecione o setor" or not email or not senha:
+                nome = nome.strip()
+                cpf = cpf.strip()
+                email = email.strip()
+                ok_senha, msg_senha = validar_senha(senha)
+
+                if not nome or not cpf or setor_cad == "Selecione o setor" or not email or not senha:
                     st.error("Preencha todos os campos obrigatórios (*).")
-                elif not ok:
-                    st.error(msg)
+                elif not validar_cpf(cpf):
+                    st.error("CPF inválido. Use o formato 000.000.000-00.")
+                elif not validar_email(email):
+                    st.error("E-mail inválido.")
+                elif any(f["Email"].lower() == email.lower() for f in st.session_state.funcionarios):
+                    st.error("Já existe um funcionário com esse e-mail.")
+                elif any(f["CPF"] == cpf for f in st.session_state.funcionarios):
+                    st.error("Já existe um funcionário com esse CPF.")
+                elif not ok_senha:
+                    st.error(msg_senha)
                 else:
                     st.session_state.funcionarios.append({
-                        "Nome": nome, "CPF": cpf, "Setor": setor, "Email": email, "Senha": senha
+                        "Nome": nome, "CPF": cpf, "Setor": setor_cad, "Email": email, "Senha": senha
                     })
+                    st.success("Funcionário cadastrado com sucesso!")
 
+    elif tela == "Gerenciar usuários":
+        st.header("Gerenciar usuários")
+        df = pd.DataFrame(st.session_state.funcionarios).drop(columns=["Senha"])
+        st.dataframe(df, use_container_width=True, hide_index=True)
+
+        st.subheader("Remover funcionário")
+        removiveis = [f["Email"] for f in st.session_state.funcionarios if f["Email"] != usuario["Email"]]
+        if removiveis:
+            email_remover = st.selectbox("Selecione o e-mail", removiveis)
+            if st.button("Remover"):
+                st.session_state.funcionarios = [
+                    f for f in st.session_state.funcionarios if f["Email"] != email_remover
+                ]
+                st.success("Funcionário removido.")
+                st.rerun()
+        else:
+            st.info("Não há outros funcionários para remover.")
+
+    else:
+        st.header(tela)
+        st.info("calma aí paizao, jaja os caba chega nas proximas telas")
