@@ -132,3 +132,18 @@ header[data-testid="stHeader"] {
     font-weight: 700 !important;
     margin: 0 !important;
 }
+
+.divisor-asterisco {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #F68324;
+    font-size: 16px;
+    margin-top: 4px;
+}
+.divisor-asterisco span.linha {
+    width: 60px;
+    height: 1px;
+    background-color: rgba(246, 131, 36, 0.45);
+}
