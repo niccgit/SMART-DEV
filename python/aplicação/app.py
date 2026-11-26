@@ -50,3 +50,15 @@ def validar_senha(senha):
     if not re.search(r"[0-9]", senha):
         return False, "Falta pelo menos 1 número."
     return True, "Ok"
+
+def autenticar_usuario(email, senha):
+    for func in st.session_state.funcionarios:
+        if func["Email"] == email and func["Senha"] == senha:
+            return func
+    return None
+
+if st.session_state.usuario_logado is None:
+    carregar_css("style.css")
+    margem_esq, centro, margem_dir = st.columns([0.5, 3.4, 0.5])
+    with centro:
+        lado_esq, lado_dir = st.columns([1, 1.05], gap="small")
