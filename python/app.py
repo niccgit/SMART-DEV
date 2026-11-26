@@ -62,6 +62,7 @@ if "usuario_logado" not in st.session_state:
 if "tela" not in st.session_state:
     st.session_state.tela = None
 
+
 def mostrar_login():
 
     st.title("Com carinho, Flor")
@@ -124,6 +125,40 @@ def mostrar_menu(usuario, telas_permitidas):
         st.session_state.tela = None
 
         st.rerun()
+
+
+def cadastrar_funcionario():
+
+    st.title("Cadastrar funcionário")
+    with st.form("form_cadastro_funcionario"):
+
+        nome = st.text_input("Nome completo")
+        cpf = st.text_input("CPF")
+        setor = st.selectbox(
+            "Setor",
+            SETORES[1:] if False else SETORES
+        )
+        email = st.text_input("E-mail corporativo")
+        senha = st.text_input(
+            "Senha",
+            type="password"
+        )
+        cadastrar = st.form_submit_button(
+            "Cadastrar funcionário"
+        )
+
+        if cadastrar:
+            sucesso, mensagem = banco.cadastrar_usuario(
+                nome,
+                cpf,
+                setor,
+                email,
+                senha
+            )
+            if sucesso:
+                st.success(mensagem)
+            else:
+                st.error(mensagem)
 
 
 def abrir_tela(nome_tela, usuario):
