@@ -10,7 +10,6 @@ st.set_page_config(
 estilo.aplicar_estilo()
 banco.criar_tabelas()
 
-
 setores = [
     "Administração",
     "Financeiro",
@@ -62,6 +61,39 @@ if "usuario_logado" not in st.session_state:
 
 if "tela" not in st.session_state:
     st.session_state.tela = None
+
+def mostrar_login():
+
+    st.title("Com carinho, Flor")
+    st.subheader("Acesso ao sistema")
+    with st.form("form_login"):
+        email = st.text_input("E-mail corporativo")
+        senha = st.text_input(
+            "Senha",
+            type="password"
+        )
+        entrar = st.form_submit_button("Entrar")
+
+        if entrar:
+            usuario = banco.buscar_usuario_login(
+                email,
+                senha
+            )
+            if usuario:
+                st.session_state.usuario_logado = usuario
+                setor = usuario["setor"]
+                telas_permitidas = telas_por_setor.get(
+                    setor,
+                    []
+                )
+
+                if telas_permitidas:
+                    st.session_state.tela = telas_permitidas[0]
+                    st.rerun()
+                else:
+                    st.error("Setor sem telas cadastradas.")
+            else:
+                st.error("E-mail ou senha incorretos.")
 
 
 def abrir_tela(nome_tela, usuario):
