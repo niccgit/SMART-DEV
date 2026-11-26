@@ -63,3 +63,19 @@ header[data-testid="stHeader"] {
     text-align: center;
     padding: 10px 0;
 }
+
+.titulo-marca-login {
+    color: #FFE9C4 !important;
+    font-size: 36px !important;
+    font-weight: 700 !important;
+    margin: 0 0 12px 0 !important;
+}
+
+.texto-boas-vindas {
+    color: #FFE9C4 !important;
+    font-size: 14.5px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    max-width: 290px;
+    margin: 0 auto 26px auto !important;
+}
