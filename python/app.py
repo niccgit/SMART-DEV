@@ -231,6 +231,25 @@ def gerenciar_funcionarios(usuario_logado):
             "Salvar alterações"
         )
 
+        if atualizar:
+            if proprio_usuario:
+                setor = usuario_selecionado["setor"]
+                situacao = usuario_selecionado["situacao"]
+
+            sucesso, mensagem = banco.atualizar_usuario(
+                id_selecionado,
+                nome,
+                setor,
+                situacao,
+                nova_senha
+            )
+
+            if sucesso:
+                st.success(mensagem)
+                st.rerun()
+            else:
+                st.error(mensagem)
+
 
 def abrir_tela(nome_tela, usuario):
 
