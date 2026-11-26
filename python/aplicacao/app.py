@@ -11,7 +11,6 @@ def carregar_css(nome_arquivo):
         with open(nome_arquivo, "r", encoding="utf-8") as arquivo:
             st.markdown(f"<style>{arquivo.read()}</style>", unsafe_allow_html=True)
 
-
 def carregar_imagem_base64(caminho_imagem):
     if not os.path.exists(caminho_imagem):
         return ""
@@ -31,7 +30,6 @@ def validar_senha(senha):
 
 def validar_email(email):
     return re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email) is not None
-
 
 def validar_cpf(cpf):
     return re.fullmatch(r"\d{3}\.\d{3}\.\d{3}-\d{2}", cpf) is not None
@@ -226,7 +224,19 @@ else:
                 st.rerun()
         else:
             st.info("Não há outros funcionários para remover.")
+    
+    elif tela == "Fila de montagem":
+        st.header("Fila de montagem")
+
+        st.button("Pedido 01")
+        st.button("Pedido 02")
+        st.button("Pedido 03")
+        st.button("Pedido 04")
+        st.button("Pedido 05")
+        st.button("Pedido 06")
 
     else:
         st.header(tela)
         st.info("calma aí paizao, jaja os caba chega nas proximas telas")
+
+
