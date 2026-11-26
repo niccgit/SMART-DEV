@@ -2,7 +2,6 @@ import sqlite3
 import hashlib
 
 DB_NAME = "floricultura.db"
-
 email_root = "root@email.com"
 senha_root = "1234"
 
