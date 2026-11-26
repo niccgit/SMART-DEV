@@ -107,7 +107,20 @@ if st.session_state.usuario_logado is None:
                     if usuario:
                         st.session_state.usuario_logado = usuario
                         setor_do_usuario = usuario["Setor"]
-                        st.session_state.tela_atual = ESTRUTURA_SETORES[setor_do_usuario][0]
+                        st.session_state.tela_atual = estrutura_setores[setor_do_usuario][0]
                         st.rerun()
                     else:
                         st.error("E-mail ou senha inválidos.")
+
+        st.markdown("<br>", unsafe_allow_html=True)
+        with st.expander("💡 Contas prontas para testar todos os 6 setores"):
+            st.write("- **Administração:** `admin@flor.com` | Senha: `Admin123`")
+            st.write("- **Financeiro:** `fin@flor.com` | Senha: `Finan123`")
+            st.write("- **Atendimento:** `atend@flor.com` | Senha: `Atend123`")
+            st.write("- **E-commerce:** `ecom@flor.com` | Senha: `Ecom1234`")
+            st.write("- **Estoque:** `estoque@flor.com` | Senha: `Estoq123`")
+            st.write("- **Montagem:** `montagem@flor.com` | Senha: `Monta123`")
+
+else:
+    usuario = st.session_state.usuario_logado
+    setor_usuario = usuario["Setor"]
