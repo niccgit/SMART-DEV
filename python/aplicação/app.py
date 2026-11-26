@@ -145,4 +145,28 @@ else:
                         st.session_state.tela_atual = pagina
                         st.rerun()
 
+        st.divider()
+        if st.button("Sair do Sistema", use_container_width=True):
+            st.session_state.usuario_logado = None
+            st.session_state.tela_atual = None
+            st.rerun()
+
+    tela = st.session_state.tela_atual
+
+    if tela == "Cadastrar funcionário":
+        st.header("Cadastrar funcionário")
+        with st.form("form_cadastro", clear_on_submit=True):
+            nome = st.text_input("NOME COMPLETO*")
+            col1, col2 = st.columns(2)
+            with col1:
+                cpf = st.text_input("CPF*", max_chars=14)
+            with col2:
+                setor = st.selectbox("SETOR*", ["Selecione o setor"] + list(ESTRUTURA_SETORES.keys()))
+            col3, col4 = st.columns(2)
+            with col3:
+                email = st.text_input("E-MAIL CORPORATIVO*")
+            with col4:
+                senha = st.text_input("SENHA*", type="password")
+            st.caption("A senha deve ter de 8 a 16 caracteres, com no mínimo 1 minúscula, 1 maiúscula e 1 número.")
+
 
