@@ -94,3 +94,20 @@ if st.session_state.usuario_logado is None:
 
                 email_input = st.text_input("✉  E-MAIL CORPORATIVO", placeholder="seu.email@flor.com")
                 senha_input = st.text_input("🔒  SENHA", placeholder="Digite sua senha", type="password")
+                btn_entrar = st.form_submit_button("Entrar")
+
+                st.markdown("""
+                    <div class="rodape-esqueceu-senha">
+                        Esqueceu a senha? <strong style="color: #CF4845;">Procure um administrador</strong> para<br>redefini-la.
+                    </div>
+                    <div class="cantos-ornamento-dir"><span>❖</span><span>❖</span></div>
+                """, unsafe_allow_html=True)
+                if btn_entrar:
+                    usuario = autenticar_usuario(email_input, senha_input)
+                    if usuario:
+                        st.session_state.usuario_logado = usuario
+                        setor_do_usuario = usuario["Setor"]
+                        st.session_state.tela_atual = ESTRUTURA_SETORES[setor_do_usuario][0]
+                        st.rerun()
+                    else:
+                        st.error("E-mail ou senha inválidos.")
