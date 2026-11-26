@@ -173,3 +173,14 @@ def listar_usuarios():
         """
     )
     return usuarios
+
+def cadastrar_usuario(nome, cpf, setor, email, senha):
+
+    nome = nome.strip()
+    cpf = cpf.strip()
+    email = email.strip()
+
+    if not nome or not cpf or not setor or not email or not senha:
+        return False, "Preencha todos os campos."
+
+    erro = validar_senha(senha)
