@@ -245,3 +245,30 @@ def atualizar_status_pedido(id_pedido, novo_status):
         WHERE id = ?
     """, (novo_status, id_pedido))
     return True, "Status do pedido atualizado com sucesso!"
+
+
+def listar_estoque():
+    produtos = consultar("""
+        SELECT id, nome, tipo, quantidade, estoque_minimo
+        FROM produtos
+        WHERE situacao = 'Ativo'
+        ORDER BY nome
+    """)
+    resultado = []
+    for produto in produtos:
+        quantidade = produto["quantidade"]
+        minimo = produto["estoque_minimo"]
+        if quantidade <= 0:
+            situacao = "Zerado"
+        elif quantidade <= minimo:
+            situacao = "Baixo"
+        else:
+            situacao = "Normal"
+        resultado.append({
+            "id": produto["id"],
+            "produto": produto["nome"],
+            "tipo": produto["tipo"],
+            "quantidade": quantidade,
+            "situacao": situacao
+        })
+    return resultado
