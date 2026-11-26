@@ -309,7 +309,6 @@ def registrar_entrada_estoque(id_produto, quantidade):
     conexao.close()
     return True, "Entrada registrada com sucesso."
 
-
 def registrar_saida_estoque(id_produto, quantidade, motivo):
     if quantidade <= 0:
         return False, "Informe uma quantidade maior que zero."
@@ -326,4 +325,20 @@ def registrar_saida_estoque(id_produto, quantidade, motivo):
     if produto is None:
         conexao.close()
         return False, "Produto não encontrado ou inativo."
-    
+    if quantidade > produto["quantidade"]:
+        conexao.close()
+        return False, "A quantidade de saída é maior que o estoque disponível."
+    cursor.execute("""
+        UPDATE produtos
+        SET quantidade = quantidade - ?
+        WHERE id = ?
+    """, (quantidade, id_produto))
+    cursor.execute("""
+        INSERT INTO movimentacoes_estoque
+        (produto_id, tipo, quantidade, motivo, data)
+        VALUES (?, ?, ?, ?, datetime('now', 'localtime'))
+    """, (id_produto, "Saída", quantidade, motivo))
+    conexao.commit()
+    conexao.close()
+    return True, "Saída registrada com sucesso."
+
