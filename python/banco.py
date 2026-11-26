@@ -272,3 +272,11 @@ def listar_estoque():
             "situacao": situacao
         })
     return resultado
+
+def listar_produtos_estoque():
+    return consultar("""
+        SELECT id, nome
+        FROM produtos
+        WHERE situacao = 'Ativo'
+        ORDER BY nome
+    """)
