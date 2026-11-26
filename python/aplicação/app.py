@@ -124,3 +124,25 @@ if st.session_state.usuario_logado is None:
 else:
     usuario = st.session_state.usuario_logado
     setor_usuario = usuario["Setor"]
+
+    with st.sidebar:
+        st.title("Com carinho, Flor")
+        st.write(f"**Usuário:** {usuario['Nome']}")
+        st.write(f"**Setor:** {setor_usuario}")
+        st.divider()
+
+        if setor_usuario == "Administração":
+            setores_permitidos = list(estrutura_setores.keys())
+        else:
+            setores_permitidos = [setor_usuario]
+
+        for setor in setores_permitidos:
+            aberto = (st.session_state.tela_atual in estrutura_setores[setor])
+            with st.expander(setor.upper(), expanded=aberto):
+                for pagina in estrutura_setores[setor]:
+                    tipo = "primary" if st.session_state.tela_atual == pagina else "secondary"
+                    if st.button(pagina, key=f"nav_{pagina}", use_container_width=True, type=tipo):
+                        st.session_state.tela_atual = pagina
+                        st.rerun()
+
+
