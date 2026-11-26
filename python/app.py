@@ -96,6 +96,21 @@ def mostrar_login():
                 st.error("E-mail ou senha incorretos.")
 
 
+def mostrar_menu(usuario, telas_permitidas):
+
+    st.sidebar.title("Com carinho, Flor")
+    st.sidebar.write(
+        f"Olá, {usuario['nome_completo']}!"
+    )
+    st.sidebar.write(
+        f"Setor: {usuario['setor']}"
+    )
+    st.sidebar.divider()
+    indice = telas_permitidas.index(
+        st.session_state.tela
+    )
+
+
 def abrir_tela(nome_tela, usuario):
 
     if nome_tela == "Cadastrar funcionário":
