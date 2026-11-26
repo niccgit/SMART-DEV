@@ -217,13 +217,13 @@ def atualizar_usuario(id_usuario, nome, setor, situacao, nova_senha=""):
         """, (criptografar_senha(nova_senha), id_usuario))
     return True, "Funcionário atualizado com sucesso!"
 
+
 def listar_pedidos_montagem():
     return consultar("""
         SELECT *
         FROM pedidos
         ORDER BY id
     """)
-
 
 def atualizar_status_pedido(id_pedido, novo_status):
     status_permitidos = [
