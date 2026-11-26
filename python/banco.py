@@ -295,3 +295,16 @@ def registrar_entrada_estoque(id_produto, quantidade):
     if produto is None:
         conexao.close()
         return False, "Produto não encontrado ou inativo."
+    cursor.execute("""
+        UPDATE produtos
+        SET quantidade = quantidade + ?
+        WHERE id = ?
+    """, (quantidade, id_produto))
+    cursor.execute("""
+        INSERT INTO movimentacoes_estoque
+        (produto_id, tipo, quantidade, motivo, data)
+        VALUES (?, ?, ?, ?, datetime('now', 'localtime'))
+    """, (id_produto, "Entrada", quantidade, "Reposição"))
+    conexao.commit()
+    conexao.close()
+    return True, "Entrada registrada com sucesso."
