@@ -92,3 +92,5 @@ if st.session_state.usuario_logado is None:
                     </div>
                 """, unsafe_allow_html=True)
 
+                email_input = st.text_input("✉  E-MAIL CORPORATIVO", placeholder="seu.email@flor.com")
+                senha_input = st.text_input("🔒  SENHA", placeholder="Digite sua senha", type="password")
