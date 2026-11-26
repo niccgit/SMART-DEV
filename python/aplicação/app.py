@@ -62,3 +62,21 @@ if st.session_state.usuario_logado is None:
     margem_esq, centro, margem_dir = st.columns([0.5, 3.4, 0.5])
     with centro:
         lado_esq, lado_dir = st.columns([1, 1.05], gap="small")
+        with lado_esq:
+            st.markdown(f"""
+                <div class="painel-esquerdo-login">
+                    <div class="moldura-interna-esq">
+                        <div class="cantos-ornamento"><span>❖</span><span>❖</span></div>
+                        <div class="conteudo-esquerdo-centro">
+                            <h1 class="titulo-marca-login marca-italico">Com carinho, Flor</h1>
+                            <p class="texto-boas-vindas">
+                                Aqui cada buquê nasce com cuidado. Entre para acompanhar pedidos, estoque e finanças da sua floricultura.
+                            </p>
+                            <div class="circulo-flor-destaque">
+                                <img src="data:image/jpeg;base64,{logo_base64}">
+                            </div>
+                        </div>
+                        <div class="cantos-ornamento"><span>❖</span><span>❖</span></div>
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
