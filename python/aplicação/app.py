@@ -39,3 +39,14 @@ if "usuario_logado" not in st.session_state:
 
 if "tela_atual" not in st.session_state:
     st.session_state.tela_atual = None
+
+def validar_senha(senha):
+    if len(senha) < 8 or len(senha) > 16:
+        return False, "A senha deve ter entre 8 e 16 caracteres."
+    if not re.search(r"[a-z]", senha):
+        return False, "Falta pelo menos 1 letra minúscula."
+    if not re.search(r"[A-Z]", senha):
+        return False, "Falta pelo menos 1 letra maiúscula."
+    if not re.search(r"[0-9]", senha):
+        return False, "Falta pelo menos 1 número."
+    return True, "Ok"
