@@ -80,3 +80,15 @@ if st.session_state.usuario_logado is None:
                     </div>
                 </div>
             """, unsafe_allow_html=True)
+        with lado_dir:
+            with st.form("form_login"):
+                st.markdown("""
+                    <div class="cantos-ornamento-dir"><span>❖</span><span>❖</span></div>
+                    <div class="cabecalho-form-login">
+                        <h2 class="titulo-login-direito">Login</h2>
+                        <div class="divisor-asterisco">
+                            <span class="linha"></span><span>✳</span><span class="linha"></span>
+                        </div>
+                    </div>
+                """, unsafe_allow_html=True)
+
