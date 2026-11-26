@@ -308,3 +308,20 @@ def registrar_entrada_estoque(id_produto, quantidade):
     conexao.commit()
     conexao.close()
     return True, "Entrada registrada com sucesso."
+
+def registrar_saida_estoque(id_produto, quantidade, motivo):
+    if quantidade <= 0:
+        return False, "Informe uma quantidade maior que zero."
+    if not motivo:
+        return False, "Selecione o motivo da saída."
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute("""
+        SELECT quantidade
+        FROM produtos
+        WHERE id = ? AND situacao = 'Ativo'
+    """, (id_produto,))
+    produto = cursor.fetchone()
+    if produto is None:
+        conexao.close()
+        return False, "Produto não encontrado ou inativo."
