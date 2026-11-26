@@ -1,0 +1,239 @@
+@import url('https://googleapis.com');=
+
+.stApp, p, label, input, button, h1, h2, h3, h4, div {
+    font-family: 'Kreon', serif !important;
+}
+
+.marca-italico {
+    font-family: 'Kreon', serif !important;
+    font-style: italic !important;
+    font-weight: 700 !important;
+}
+
+.stApp {
+    background: linear-gradient(135deg, #FAF0E0 0%, #FFE9C4 55%, #FDAA71 100%);
+}
+
+header[data-testid="stHeader"] {
+    background:  linear-gradient(135deg, #FAF0E0 0%, #FFE9C4 55%, #ffba8b 100%) !important;
+}
+
+[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login) {
+    gap: 0px !important;
+    align-items: stretch !important;
+    border-radius: 22px !important;
+    overflow: hidden !important;
+    background-color: linear-gradient(135deg, #FAF0E0 0%, #FFE9C4 55%, #FDAA71 100%) !important;
+}
+
+
+[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login) > [data-testid="column"] {
+    padding: 0px !important;
+}
+
+.painel-esquerdo-login {
+    background: linear-gradient(180deg, #CF4845 0%, #FF8987 100%);
+    height: 100%;
+    min-height: 510px;
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.moldura-interna-esq {
+    border: 1px solid rgba(255, 233, 196, 0.35);
+    border-radius: 12px;
+    height: 100%;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cantos-ornamento {
+    display: flex;
+    justify-content: space-between;
+    color: #FFE9C4;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.conteudo-esquerdo-centro {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.titulo-marca-login {
+    color: #FFE9C4 !important;
+    font-size: 36px !important;
+    font-weight: 700 !important;
+    margin: 0 0 12px 0 !important;
+}
+
+.texto-boas-vindas {
+    color: #FFE9C4 !important;
+    font-size: 14.5px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    max-width: 290px;
+    margin: 0 auto 26px auto !important;
+}
+
+.circulo-flor-destaque {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-color: #FAF0E0;
+    border: 4px solid #FFE9C4;
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.16);
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circulo-flor-destaque img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+[data-testid="stHorizontalBlock"]:has(.painel-esquerdo-login) [data-testid="stForm"] {
+    background-color: #FAF0E0 !important;
+    border: none !important;
+    border-radius: 0px !important;
+    padding: 24px 46px !important;
+    min-height: 510px !important;
+    margin: 0px !important;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cantos-ornamento-dir {
+    display: flex;
+    justify-content: space-between;
+    color: #F68324;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.cabecalho-form-login {
+    text-align: center;
+    margin: 8px 0 18px 0;
+}
+
+.titulo-login-direito {
+    color: #CF4845 !important;
+    font-size: 34px !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+.divisor-asterisco {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #F68324;
+    font-size: 16px;
+    margin-top: 4px;
+}
+.divisor-asterisco span.linha {
+    width: 60px;
+    height: 1px;
+    background-color: rgba(246, 131, 36, 0.45);
+}
+
+[data-testid="stForm"] label p {
+    color: #CF4845 !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.6px;
+    margin-bottom: 2px !important;
+}
+
+.stTextInput div[data-baseweb="input"] {
+    background-color: rgba(255, 233, 196, 0.55) !important;
+    border: none !important;
+    border-bottom: 2.5px solid #F68324 !important;
+    border-radius: 8px 8px 0px 0px !important;
+    padding: 2px 6px !important;
+    transition: all 0.25s ease !important;
+}
+
+.stTextInput div[data-baseweb="input"]:focus-within {
+    background-color: #FFE9C4 !important;
+    border-bottom: 2.5px solid #CF4845 !important;
+}
+
+.stTextInput div[data-baseweb="base-input"],
+.stTextInput input,
+.stTextInput div[data-baseweb="input"] > div,
+.stTextInput div[data-baseweb="input"] button {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+
+.stTextInput input {
+    padding: 10px 8px !important;
+    font-size: 15px !important;
+}
+
+
+.stTextInput input::placeholder {
+    color: #9A7B6A !important;
+    -webkit-text-fill-color: #9A7B6A !important;
+}
+
+.stTextInput div[data-baseweb="input"] button {
+    opacity: 0.75;
+    transition: 0.2s;
+}
+.stTextInput div[data-baseweb="input"] button:hover {
+    opacity: 1;
+}
+.stTextInput div[data-baseweb="input"] button svg {
+    fill: #CF4845 !important;
+    color: #CF4845 !important;
+    width: 18px !important;
+    height: 18px !important;
+}
+
+div.stFormSubmitButton {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 22px !important;
+}
+
+div.stFormSubmitButton > button {
+    background-color: #CF4845 !important;
+    color: #FFE9C4 !important;
+    border-radius: 25px !important;
+    padding: 10px 64px !important;
+    border: none !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    transition: 0.2s ease;
+}
+
+div.stFormSubmitButton > button:hover {
+    background-color: #F87557 !important;
+    color: #000000 !important;
+}
+
+.rodape-esqueceu-senha {
+    text-align: center;
+    font-size: 12.5px;
+    color: #5C4B48;
+    line-height: 1.4;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
