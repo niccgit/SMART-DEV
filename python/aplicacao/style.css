@@ -204,3 +204,25 @@ header[data-testid="stHeader"] {
     width: 18px !important;
     height: 18px !important;
 }
+
+div.stFormSubmitButton {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 22px !important;
+}
+
+div.stFormSubmitButton > button {
+    background-color: #CF4845 !important;
+    color: #FFE9C4 !important;
+    border-radius: 25px !important;
+    padding: 10px 64px !important;
+    border: none !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    transition: 0.2s ease;
+}
+
+div.stFormSubmitButton > button:hover {
+    background-color: #F87557 !important;
+    color: #000000 !important;
+}
