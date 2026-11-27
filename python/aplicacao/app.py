@@ -15,13 +15,13 @@ def carregar_imagem(caminho):
 
 logo = carregar_imagem("Logo Com carinho, Flor.jpg")
 
-setores = {
+estrutura_setores = {
     "Administração": ["Cadastrar funcionário", "Gerenciar usuários"],
     "Financeiro": ["Movimentações", "Pagamentos"],
     "Atendimento ao Cliente": ["Cadastrar novo pedido", "Consultar Pedidos"],
     "Gestão de E-commerce": ["Catálogo de produtos"],
     "Estoque": ["Estoque"],
-    "Montagem": ["Fila de montagem"]
+    "Montagem": ["Fila de montagem"],
 }
 
 if "funcionarios" not in st.session_state:
@@ -31,7 +31,7 @@ if "funcionarios" not in st.session_state:
         {"Nome": "Lucas (Atendimento)", "CPF": "333.333.333-33", "Setor": "Atendimento ao Cliente", "Email": "atend@flor.com", "Senha": "Atend123"},
         {"Nome": "Carla (E-commerce)", "CPF": "444.444.444-44", "Setor": "Gestão de E-commerce", "Email": "ecom@flor.com", "Senha": "Ecom1234"},
         {"Nome": "Pedro (Estoque)", "CPF": "555.555.555-55", "Setor": "Estoque", "Email": "estoque@flor.com", "Senha": "Estoq123"},
-        {"Nome": "Marcos (Montagem)", "CPF": "666.666.666-66", "Setor": "Montagem", "Email": "montagem@flor.com", "Senha": "Monta123"}
+        {"Nome": "Marcos (Montagem)", "CPF": "666.666.666-66", "Setor": "Montagem", "Email": "montagem@flor.com", "Senha": "Monta123"},
     ]
 
 if "usuario_logado" not in st.session_state:
@@ -125,7 +125,7 @@ if st.session_state.usuario_logado is None:
                     if usuario:
                         st.session_state.usuario_logado = usuario
                         setor = usuario["Setor"]
-                        st.session_state.tela_atual = setores[setor][0]
+                        st.session_state.tela_atual = estrutura_setores[setor][0]
                         st.rerun()
                     else:
                         st.error("E-mail ou senha inválidos.")
@@ -147,102 +147,102 @@ else:
     with st.sidebar:
         st.markdown(
             f"""<div class="logo-circulo">
-                <img src="data:image/jpeg;base64,{logo_base64}">
+                <img src="data:image/jpeg;base64,{logo}">
             </div>
             <div class="titulo-lateral">Com carinho, Flor</div>""",
             unsafe_allow_html=True,
         )
 
-st.markdown(
-    f"""
-    <div class="caixa-usuario">
-        <div class="icone-pessoa" aria-hidden="true">
-            <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z"/>
-            </svg>
-        </div>
-        <div class="info-usuario">
-            <div><strong>Usuário:</strong> {usuario['Nome']}</div>
-            <div><strong>Setor:</strong> {setor}</div>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+        st.markdown(
+            f"""
+            <div class="caixa-usuario">
+                <div class="icone-pessoa" aria-hidden="true">
+                    <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z"/>
+                    </svg>
+                </div>
+                <div class="info-usuario">
+                    <div><strong>Usuário:</strong> {usuario['Nome']}</div>
+                    <div><strong>Setor:</strong> {setor}</div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
-st.markdown('<hr class="divisor-lateral">', unsafe_allow_html=True)
+        st.markdown('<hr class="divisor-lateral">', unsafe_allow_html=True)
 
-if setor == "Administração":
-    setores_liberados = list(estrutura_setores.keys())
-else:
-    setores_liberados = [setor]
+        if setor == "Administração":
+            setores_liberados = list(estrutura_setores.keys())
+        else:
+            setores_liberados = [setor]
 
-for nome_setor in setores_liberados:
-    aberto = st.session_state.tela_atual in estrutura_setores[nome_setor]
-    with st.expander(nome_setor.upper(), expanded=aberto):
-        for pagina in estrutura_setores[nome_setor]:
-            tipo = "primary" if st.session_state.tela_atual == pagina else "secondary"
-            if st.button(
-                pagina,
-                key=f"nav_{pagina}",
-                use_container_width=True,
-                type=tipo,
-            ):
-                if st.session_state.tela_atual == "Consultar Pedidos":
-                    st.session_state.ped_excluir = False
-                    st.session_state.ped_editando = False
-                    st.session_state.ped_modal = (
-                        st.session_state.get("ped_modal", 0) + 1
-                    )
-                st.session_state.tela_atual = pagina
-                st.rerun()
+        for nome_setor in setores_liberados:
+            aberto = st.session_state.tela_atual in estrutura_setores[nome_setor]
+            with st.expander(nome_setor.upper(), expanded=aberto):
+                for pagina in estrutura_setores[nome_setor]:
+                    tipo = "primary" if st.session_state.tela_atual == pagina else "secondary"
+                    if st.button(
+                        pagina,
+                        key=f"nav_{pagina}",
+                        use_container_width=True,
+                        type=tipo,
+                    ):
+                        if st.session_state.tela_atual == "Consultar Pedidos":
+                            st.session_state.ped_excluir = False
+                            st.session_state.ped_editando = False
+                            st.session_state.ped_modal = (
+                                st.session_state.get("ped_modal", 0) + 1
+                            )
+                        st.session_state.tela_atual = pagina
+                        st.rerun()
 
-st.markdown('<hr class="divisor-lateral">', unsafe_allow_html=True)
+        st.markdown('<hr class="divisor-lateral">', unsafe_allow_html=True)
 
-st.markdown('<span class="ancora-sair"></span>', unsafe_allow_html=True)
-if st.button("Sair do Sistema", key="btn_sair", use_container_width=True):
-    st.session_state.usuario_logado = None
-    st.session_state.tela_atual = None
-    st.rerun()
+        st.markdown('<span class="ancora-sair"></span>', unsafe_allow_html=True)
+        if st.button("Sair do Sistema", key="btn_sair", use_container_width=True):
+            st.session_state.usuario_logado = None
+            st.session_state.tela_atual = None
+            st.rerun()
 
-tela = st.session_state.tela_atual
+    tela = st.session_state.tela_atual
 
-if tela == "Cadastrar funcionário":
-    st.header("Cadastrar funcionário")
-    with st.form("form_cadastro", clear_on_submit=True):
-        nome = st.text_input("NOME COMPLETO*")
-        col1, col2 = st.columns(2)
-        with col1:
-            cpf = st.text_input("CPF*", max_chars=14)
-        with col2:
-            setor_novo = st.selectbox(
-                "SETOR*",
-                ["Selecione o setor"] + list(estrutura_setores.keys()),
-            )
-        col3, col4 = st.columns(2)
-        with col3:
-            email = st.text_input("E-MAIL CORPORATIVO*")
-        with col4:
-            senha = st.text_input("SENHA*", type="password")
+    if tela == "Cadastrar funcionário":
+        st.header("Cadastrar funcionário")
+        with st.form("form_cadastro", clear_on_submit=True):
+            nome = st.text_input("NOME COMPLETO*")
+            col1, col2 = st.columns(2)
+            with col1:
+                cpf = st.text_input("CPF*", max_chars=14)
+            with col2:
+                setor_novo = st.selectbox(
+                    "SETOR*",
+                    ["Selecione o setor"] + list(estrutura_setores.keys()),
+                )
+            col3, col4 = st.columns(2)
+            with col3:
+                email = st.text_input("E-MAIL CORPORATIVO*")
+            with col4:
+                senha = st.text_input("SENHA*", type="password")
 
-        st.caption("A senha deve ter de 8 a 16 caracteres, com no mínimo 1 minúscula, 1 maiúscula e 1 número.")
+            st.caption("A senha deve ter de 8 a 16 caracteres, com no mínimo 1 minúscula, 1 maiúscula e 1 número.")
 
-        if st.form_submit_button("Cadastrar"):
-            ok, msg = validar_senha(senha)
-            if not nome or not cpf or setor_novo == "Selecione o setor" or not email or not senha:
-                st.error("Preencha todos os campos obrigatórios (*).")
-            elif not ok:
-                st.error(msg)
-            else:
-                st.session_state.funcionarios.append({
-                    "Nome": nome,
-                    "CPF": cpf,
-                    "Setor": setor_novo,
-                    "Email": email,
-                    "Senha": senha,
-                })
+            if st.form_submit_button("Cadastrar"):
+                ok, msg = validar_senha(senha)
+                if not nome or not cpf or setor_novo == "Selecione o setor" or not email or not senha:
+                    st.error("Preencha todos os campos obrigatórios (*).")
+                elif not ok:
+                    st.error(msg)
+                else:
+                    st.session_state.funcionarios.append({
+                        "Nome": nome,
+                        "CPF": cpf,
+                        "Setor": setor_novo,
+                        "Email": email,
+                        "Senha": senha,
+                    })
 
-elif tela == "Gerenciar usuários":
+    elif tela == "Gerenciar usuários":
         st.header("Gerenciar usuários")
 
         if "acao_usuario" not in st.session_state:
@@ -250,7 +250,7 @@ elif tela == "Gerenciar usuários":
         if "usuario_idx" not in st.session_state:
             st.session_state.usuario_idx = 0
 
-                for func in st.session_state.funcionarios:
+        for func in st.session_state.funcionarios:
             if "Ativo" not in func:
                 func["Ativo"] = True
 
