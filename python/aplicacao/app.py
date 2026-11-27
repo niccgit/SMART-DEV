@@ -261,8 +261,28 @@ else:
                 "SETOR": f["Setor"],
                 "SITUAÇÃO": "Ativo" if f.get("Ativo", True) else "Inativo",
             }
-            for f in st.session_state.funcionarios
+            for f in st.session_state.funcionario
         ])
+
+        st.dataframe(df_tabela, use_container_width=True, hide_index=True)
+
+        opcoes = [
+            f"{i} - {f['Nome']} ({f['Email']}) [{'Ativo' if f.get('Ativo', True) else 'Inativo'}]"
+            for i, f in enumerate(st.session_state.funcionarios)
+        ]
+
+        if opcoes:
+            if st.session_state.usuario_idx >= len(opcoes):
+                st.session_state.usuario_idx = 0
+
+            indice = st.selectbox(
+                "Selecione um funcionário",
+                options=range(len(opcoes)),
+                format_func=lambda i: opcoes[i],
+                index=st.session_state.usuario_idx,
+                key="sel_func",
+            )
+
     
     elif tela == "Movimentações":
         st.header("Movimentações")
