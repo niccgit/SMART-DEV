@@ -376,6 +376,32 @@ elif st.session_state.acao_usuario == "ativar":
             st.session_state.acao_usuario = None
             st.rerun()
 
+elif st.session_state.acao_usuario == "redefinir_senha":
+    with st.form("form_redefinir_senha"):
+        st.subheader("Redefinir senha")
+        senha = st.text_input("NOVA SENHA*", type="password")
+        st.caption("A senha deve ter de 8 a 16 caracteres, com no mínimo 1 minúscula, 1 maiúscula e 1 número.")
+
+        col_salvar, col_cancelar = st.columns(2)
+        with col_salvar:
+            salvar = st.form_submit_button("Salvar nova senha")
+        with col_cancelar:
+            cancelar = st.form_submit_button("Cancelar")
+
+        if salvar:
+            ok, msg = validar_senha(senha)
+            if not ok:
+                st.error(msg)
+            else:
+                st.session_state.funcionarios[selecao]["Senha"] = senha
+                st.session_state.acao_usuario = None
+                st.success("Senha redefinida com sucesso.")
+                st.rerun()
+
+        if cancelar:
+            st.session_state.acao_usuario = None
+            st.rerun()
+
 
     elif tela == "Movimentações":
         st.header("Movimentações")
