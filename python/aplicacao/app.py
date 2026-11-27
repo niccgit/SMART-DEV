@@ -141,7 +141,17 @@ if st.session_state.usuario_logado is None:
 
 else:
     usuario = st.session_state.usuario_logado
-    setor_usuario = usuario["Setor"]
+    carregar_css("style.css")
+    setor = usuario["Setor"]
+
+    with st.sidebar:
+        st.markdown(
+            f"""<div class="logo-circulo">
+                <img src="data:image/jpeg;base64,{logo_base64}">
+            </div>
+            <div class="titulo-lateral">Com carinho, Flor</div>""",
+            unsafe_allow_html=True,
+        )
 
     with st.sidebar:
         st.title("Com carinho, Flor")
