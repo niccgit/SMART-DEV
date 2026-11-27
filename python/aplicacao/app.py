@@ -120,11 +120,12 @@ if st.session_state.usuario_logado is None:
                     <div class="ornamento-dir"><span>❖</span><span>❖</span></div>
                 """, unsafe_allow_html=True)
 
-                if btn_entrar:
-                    usuario = autenticar_usuario(email_input, senha_input)
+                if entrar:
+                    usuario = autenticar_usuario(email, senha)
                     if usuario:
                         st.session_state.usuario_logado = usuario
-                        st.session_state.tela_atual = estrutura_setores[usuario["Setor"]][0]
+                        setor = usuario["Setor"]
+                        st.session_state.tela_atual = setores[setor][0]
                         st.rerun()
                     else:
                         st.error("E-mail ou senha inválidos.")
