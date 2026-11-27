@@ -205,23 +205,27 @@ if st.button("Sair do Sistema", key="btn_sair", use_container_width=True):
     st.session_state.tela_atual = None
     st.rerun()
 
-    tela = st.session_state.tela_atual
+tela = st.session_state.tela_atual
 
-    if tela == "Cadastrar funcionário":
-        st.header("Cadastrar funcionário")
-        with st.form("form_cadastro", clear_on_submit=True):
-            nome = st.text_input("NOME COMPLETO*")
-            col1, col2 = st.columns(2)
-            with col1:
-                cpf = st.text_input("CPF*", max_chars=14, placeholder="000.000.000-00")
-            with col2:
-                setor_cad = st.selectbox("SETOR*", ["Selecione o setor"] + list(estrutura_setores.keys()))
-            col3, col4 = st.columns(2)
-            with col3:
-                email = st.text_input("E-MAIL CORPORATIVO*")
-            with col4:
-                senha = st.text_input("SENHA*", type="password")
-            st.caption("A senha deve ter de 8 a 16 caracteres, com no mínimo 1 minúscula, 1 maiúscula e 1 número.")
+if tela == "Cadastrar funcionário":
+    st.header("Cadastrar funcionário")
+    with st.form("form_cadastro", clear_on_submit=True):
+        nome = st.text_input("NOME COMPLETO*")
+        col1, col2 = st.columns(2)
+        with col1:
+            cpf = st.text_input("CPF*", max_chars=14)
+        with col2:
+            setor_novo = st.selectbox(
+                "SETOR*",
+                ["Selecione o setor"] + list(estrutura_setores.keys()),
+            )
+        col3, col4 = st.columns(2)
+        with col3:
+            email = st.text_input("E-MAIL CORPORATIVO*")
+        with col4:
+            senha = st.text_input("SENHA*", type="password")
+
+        st.caption("A senha deve ter de 8 a 16 caracteres, com no mínimo 1 minúscula, 1 maiúscula e 1 número.")
 
             if st.form_submit_button("Cadastrar"):
                 nome = nome.strip()
