@@ -339,6 +339,44 @@ if st.session_state.acao_usuario == "editar":
             st.session_state.acao_usuario = None
             st.rerun()
 
+            elif st.session_state.acao_usuario == "inativar":
+    st.subheader("Inativar funcionário")
+    st.write(
+        f"Deseja inativar **{func_atual['Nome']}**? Ele não poderá mais fazer login no sistema. "
+        f'O histórico dele será mantido e o acesso pode ser liberado depois pelo botão "Ativar".'
+    )
+
+    col_conf, col_canc = st.columns(2)
+    with col_conf:
+        if st.button("Confirmar inativação", key="btn_conf_inativar"):
+            st.session_state.funcionarios[selecao]["Ativo"] = False
+            st.session_state.acao_usuario = None
+            st.success("Funcionário inativado.")
+            st.rerun()
+    with col_canc:
+        if st.button("Cancelar", key="btn_canc_inativar"):
+            st.session_state.acao_usuario = None
+            st.rerun()
+
+elif st.session_state.acao_usuario == "ativar":
+    st.subheader("Ativar funcionário")
+    st.write(
+        f"Deseja ativar **{func_atual['Nome']}**? O acesso dele ao sistema será liberado novamente."
+    )
+
+    col_conf, col_canc = st.columns(2)
+    with col_conf:
+        if st.button("Confirmar ativação", key="btn_conf_ativar"):
+            st.session_state.funcionarios[selecao]["Ativo"] = True
+            st.session_state.acao_usuario = None
+            st.success("Funcionário ativado.")
+            st.rerun()
+    with col_canc:
+        if st.button("Cancelar", key="btn_canc_ativar"):
+            st.session_state.acao_usuario = None
+            st.rerun()
+
+
     elif tela == "Movimentações":
         st.header("Movimentações")
 
