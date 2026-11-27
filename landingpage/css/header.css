@@ -1,0 +1,36 @@
+header {
+    background-color: var(--main-color);
+    padding: 16px;
+    color: var(--bg-color);
+    display: flex;
+    flex-direction: row;
+}
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Libre bodoni';
+    font-size: 2rem;
+    height: 78px;
+    font-style: italic;
+}
+h1 {
+    font-style: inherit;
+    font-size: inherit;
+}
+.logo img{
+    width: 144px;
+    transform: translateY(25%)
+}
+header nav {
+    display: flex;
+    gap: 32px;
+    font-size: 1.5rem;
+    align-items: end;
+    margin-right: auto;
+    margin-left: auto;
+}
+header div {
+    min-width: 356px;
+}

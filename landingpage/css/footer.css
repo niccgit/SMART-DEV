@@ -1,0 +1,25 @@
+footer {
+    background-color: var(--main-color);
+    align-items: center;
+    padding-top: 64px;
+    color: var(--bg-color);
+    font-size: 2rem;
+}
+footer img {
+    width: 142px;
+}
+.nome {
+    font-family: 'Libre bodoni';
+    font-size: 2.5rem;
+    font-style: italic;
+    color: var(--bg-color);
+}
+footer b {
+    font-weight: 700;
+    color: var(--contrast);
+}
+.small-text {
+    color: #F4E9D880;
+    margin-top: 64px;
+    margin-bottom: 16px;
+}
