@@ -197,11 +197,13 @@ for nome_setor in setores_liberados:
                 st.session_state.tela_atual = pagina
                 st.rerun()
 
-        st.divider()
-        if st.button("Sair do Sistema", use_container_width=True):
-            st.session_state.usuario_logado = None
-            st.session_state.tela_atual = None
-            st.rerun()
+st.markdown('<hr class="divisor-lateral">', unsafe_allow_html=True)
+
+st.markdown('<span class="ancora-sair"></span>', unsafe_allow_html=True)
+if st.button("Sair do Sistema", key="btn_sair", use_container_width=True):
+    st.session_state.usuario_logado = None
+    st.session_state.tela_atual = None
+    st.rerun()
 
     tela = st.session_state.tela_atual
 
