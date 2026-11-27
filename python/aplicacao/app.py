@@ -177,6 +177,19 @@ if setor == "Administração":
 else:
     setores_liberados = [setor]
 
+
+for nome_setor in setores_liberados:
+    aberto = st.session_state.tela_atual in estrutura_setores[nome_setor]
+    with st.expander(nome_setor.upper(), expanded=aberto):
+        for pagina in estrutura_setores[nome_setor]:
+            tipo = "primary" if st.session_state.tela_atual == pagina else "secondary"
+            if st.button(
+                pagina,
+                key=f"nav_{pagina}",
+                use_container_width=True,
+                type=tipo,
+            ):
+
         for setor_menu in setores_permitidos:
             aberto = st.session_state.tela_atual in estrutura_setores[setor_menu]
             with st.expander(setor_menu.upper(), expanded=aberto):
