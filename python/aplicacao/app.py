@@ -57,6 +57,19 @@ def autenticar_usuario(email, senha):
             return func
     return None
 
+def autenticar_adm_exclusao(usuario, senha):
+    usuario_limpo = (usuario or "").strip().lower()
+    senha_limpa = (senha or "").strip()
+    if not usuario_limpo or not senha_limpa:
+        return False
+    for func in st.session_state.funcionarios:
+        if func.get("Setor") == "Administração" and func.get("Ativo", True):
+            email_ok = func.get("Email", "").strip().lower() == usuario_limpo
+            nome_ok = func.get("Nome", "").strip().lower() == usuario_limpo
+            if (email_ok or nome_ok) and func.get("Senha") == senha_limpa:
+                return True
+    return False
+
 carregar_css("style.css")
 
 if st.session_state.usuario_logado is None:
