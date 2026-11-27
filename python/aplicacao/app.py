@@ -227,29 +227,21 @@ if tela == "Cadastrar funcionário":
 
         st.caption("A senha deve ter de 8 a 16 caracteres, com no mínimo 1 minúscula, 1 maiúscula e 1 número.")
 
-            if st.form_submit_button("Cadastrar"):
-                nome = nome.strip()
-                cpf = cpf.strip()
-                email = email.strip()
-                ok_senha, msg_senha = validar_senha(senha)
+        if st.form_submit_button("Cadastrar"):
+            ok, msg = validar_senha(senha)
+            if not nome or not cpf or setor_novo == "Selecione o setor" or not email or not senha:
+                st.error("Preencha todos os campos obrigatórios (*).")
+            elif not ok:
+                st.error(msg)
+            else:
+                st.session_state.funcionarios.append({
+                    "Nome": nome,
+                    "CPF": cpf,
+                    "Setor": setor_novo,
+                    "Email": email,
+                    "Senha": senha,
+                })
 
-                if not nome or not cpf or setor_cad == "Selecione o setor" or not email or not senha:
-                    st.error("Preencha todos os campos obrigatórios (*).")
-                elif not validar_cpf(cpf):
-                    st.error("CPF inválido. Use o formato 000.000.000-00.")
-                elif not validar_email(email):
-                    st.error("E-mail inválido.")
-                elif any(f["Email"].lower() == email.lower() for f in st.session_state.funcionarios):
-                    st.error("Já existe um funcionário com esse e-mail.")
-                elif any(f["CPF"] == cpf for f in st.session_state.funcionarios):
-                    st.error("Já existe um funcionário com esse CPF.")
-                elif not ok_senha:
-                    st.error(msg_senha)
-                else:
-                    st.session_state.funcionarios.append({
-                        "Nome": nome, "CPF": cpf, "Setor": setor_cad, "Email": email, "Senha": senha
-                    })
-                    st.success("Funcionário cadastrado com sucesso!")
 
     elif tela == "Gerenciar usuários":
         st.header("Gerenciar usuários")
