@@ -114,10 +114,10 @@ if st.session_state.usuario_logado is None:
                 entrar = st.form_submit_button("Entrar")
 
                 st.markdown("""
-                    <div class="rodape-esqueceu-senha">
+                    <div class="rodape-senha">
                         Esqueceu a senha? <strong style="color: #CF4845;">Procure um administrador</strong> para<br>redefini-la.
                     </div>
-                    <div class="cantos-ornamento-dir"><span>❖</span><span>❖</span></div>
+                    <div class="ornamento-dir"><span>❖</span><span>❖</span></div>
                 """, unsafe_allow_html=True)
 
                 if btn_entrar:
