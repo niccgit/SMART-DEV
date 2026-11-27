@@ -282,7 +282,24 @@ else:
                 index=st.session_state.usuario_idx,
                 key="sel_func",
             )
+            st.session_state.usuario_idx = indice
+            func_sel = st.session_state.funcionarios[indice]
+            ativo = func_sel.get("Ativo", True)
 
+            col_editar, col_senha, col_status = st.columns(3)
+            with col_editar:
+                if st.button("Editar", use_container_width=True):
+                    st.session_state.acao_usuario = "editar"
+                    st.rerun()
+            with col_senha:
+                if st.button("Redefinir senha", use_container_width=True):
+                    st.session_state.acao_usuario = "redefinir_senha"
+                    st.rerun()
+            with col_status:
+                rotulo = "Inativar" if ativo else "Ativar"
+                if st.button(rotulo, use_container_width=True):
+                    st.session_state.acao_usuario = "inativar" if ativo else "ativar"
+                    st.rerun()
     
     elif tela == "Movimentações":
         st.header("Movimentações")
