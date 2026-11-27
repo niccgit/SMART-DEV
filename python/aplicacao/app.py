@@ -170,10 +170,12 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-        if setor_usuario == "Administração":
-            setores_permitidos = list(estrutura_setores.keys())
-        else:
-            setores_permitidos = [setor_usuario]
+st.markdown('<hr class="divisor-lateral">', unsafe_allow_html=True)
+
+if setor == "Administração":
+    setores_liberados = list(estrutura_setores.keys())
+else:
+    setores_liberados = [setor]
 
         for setor_menu in setores_permitidos:
             aberto = st.session_state.tela_atual in estrutura_setores[setor_menu]
