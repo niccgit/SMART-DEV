@@ -109,9 +109,9 @@ if st.session_state.usuario_logado is None:
                     </div>
                 """, unsafe_allow_html=True)
 
-                email_input = st.text_input("✉  E-MAIL CORPORATIVO", placeholder="seu.email@flor.com")
-                senha_input = st.text_input("🔒  SENHA", placeholder="Digite sua senha", type="password")
-                btn_entrar = st.form_submit_button("Entrar")
+                email = st.text_input("E-MAIL CORPORATIVO", placeholder="seu.email@flor.com")
+                senha = st.text_input("SENHA", placeholder="Digite sua senha", type="password")
+                entrar = st.form_submit_button("Entrar")
 
                 st.markdown("""
                     <div class="rodape-esqueceu-senha">
