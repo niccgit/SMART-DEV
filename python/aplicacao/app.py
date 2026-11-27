@@ -300,7 +300,45 @@ else:
                 if st.button(rotulo, use_container_width=True):
                     st.session_state.acao_usuario = "inativar" if ativo else "ativar"
                     st.rerun()
-    
+
+if st.session_state.acao_usuario == "editar":
+    with st.form("form_editar_funcionario"):
+        st.subheader("Editando funcionário")
+        nome = st.text_input("NOME COMPLETO*", value=func_atual["Nome"])
+
+        col_cpf, col_setor = st.columns(2)
+        with col_cpf:
+            cpf = st.text_input("CPF*", value=func_atual["CPF"], max_chars=14)
+        with col_setor:
+            setores = list(ESTRUTURA_SETORES.keys())
+            idx = setores.index(func_atual["Setor"]) if func_atual["Setor"] in setores else 0
+            setor = st.selectbox("SETOR*", options=setores, index=idx)
+
+        email = st.text_input("E-MAIL CORPORATIVO*", value=func_atual["Email"])
+
+        col_salvar, col_cancelar = st.columns(2)
+        with col_salvar:
+            salvar = st.form_submit_button("Salvar alterações")
+        with col_cancelar:
+            cancelar = st.form_submit_button("Cancelar")
+
+        if salvar:
+            if not nome or not cpf or not email:
+                st.error("Preencha todos os campos obrigatórios (*).")
+            else:
+                func = st.session_state.funcionarios[selecao]
+                func["Nome"] = nome
+                func["CPF"] = cpf
+                func["Setor"] = setor
+                func["Email"] = email
+                st.session_state.acao_usuario = None
+                st.success("Dados do funcionário atualizados com sucesso.")
+                st.rerun()
+
+        if cancelar:
+            st.session_state.acao_usuario = None
+            st.rerun()
+
     elif tela == "Movimentações":
         st.header("Movimentações")
 
