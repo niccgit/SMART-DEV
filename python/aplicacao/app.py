@@ -242,24 +242,27 @@ if tela == "Cadastrar funcionário":
                     "Senha": senha,
                 })
 
-
-    elif tela == "Gerenciar usuários":
+elif tela == "Gerenciar usuários":
         st.header("Gerenciar usuários")
-        df = pd.DataFrame(st.session_state.funcionarios).drop(columns=["Senha"])
-        st.dataframe(df, use_container_width=True, hide_index=True)
 
-        st.subheader("Remover funcionário")
-        removiveis = [f["Email"] for f in st.session_state.funcionarios if f["Email"] != usuario["Email"]]
-        if removiveis:
-            email_remover = st.selectbox("Selecione o e-mail", removiveis)
-            if st.button("Remover"):
-                st.session_state.funcionarios = [
-                    f for f in st.session_state.funcionarios if f["Email"] != email_remover
-                ]
-                st.success("Funcionário removido.")
-                st.rerun()
-        else:
-            st.info("Não há outros funcionários para remover.")
+        if "acao_usuario" not in st.session_state:
+            st.session_state.acao_usuario = None
+        if "usuario_idx" not in st.session_state:
+            st.session_state.usuario_idx = 0
+
+                for func in st.session_state.funcionarios:
+            if "Ativo" not in func:
+                func["Ativo"] = True
+
+        df_tabela = pd.DataFrame([
+            {
+                "NOME": f["Nome"],
+                "E-MAIL": f["Email"],
+                "SETOR": f["Setor"],
+                "SITUAÇÃO": "Ativo" if f.get("Ativo", True) else "Inativo",
+            }
+            for f in st.session_state.funcionarios
+        ])
     
     elif tela == "Movimentações":
         st.header("Movimentações")
