@@ -51,6 +51,12 @@ def validar_senha(senha):
         return False, "Falta pelo menos 1 número."
     return True, "Ok"
 
+def autenticar_usuario(email, senha):
+    for func in st.session_state.funcionarios:
+        if func["Email"] == email and func["Senha"] == senha:
+            return func
+    return None
+
 carregar_css("style.css")
 
 if st.session_state.usuario_logado is None:
