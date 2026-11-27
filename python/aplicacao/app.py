@@ -80,19 +80,19 @@ if st.session_state.usuario_logado is None:
 
         with lado_esq:
             st.markdown(f"""
-                <div class="painel-esquerdo-login">
-                    <div class="moldura-interna-esq">
-                        <div class="cantos-ornamento"><span>❖</span><span>❖</span></div>
-                        <div class="conteudo-esquerdo-centro">
-                            <h1 class="titulo-marca-login marca-italico">Com carinho, Flor</h1>
-                            <p class="texto-boas-vindas">
+                <div class="painel-esq">
+                    <div class="moldura-esq">
+                        <div class="ornamento"><span>❖</span><span>❖</span></div>
+                        <div class="conteudo-esq">
+                            <h1 class="titulo-login italico">Com carinho, Flor</h1>
+                            <p class="boas-vindas">
                                 Aqui cada buquê nasce com cuidado. Entre para acompanhar pedidos, estoque e finanças da sua floricultura.
                             </p>
-                            <div class="circulo-flor-destaque">
-                                <img src="data:image/jpeg;base64,{logo_base64}">
+                            <div class="circulo-logo">
+                                <img src="data:image/jpeg;base64,{logo}">
                             </div>
                         </div>
-                        <div class="cantos-ornamento"><span>❖</span><span>❖</span></div>
+                        <div class="ornamento"><span>❖</span><span>❖</span></div>
                     </div>
                 </div>
             """, unsafe_allow_html=True)
