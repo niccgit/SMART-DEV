@@ -1,55 +1,27 @@
 import streamlit as st
 import re
-import os
 import pandas as pd
 import base64
 
 st.set_page_config(page_title="Com carinho, Flor - Sistema", layout="wide")
 
-def carregar_css(nome_arquivo):
-    if os.path.exists(nome_arquivo):
-        with open(nome_arquivo, "r", encoding="utf-8") as arquivo:
-            st.markdown(f"<style>{arquivo.read()}</style>", unsafe_allow_html=True)
+def carregar_css(nome):
+    with open(nome, "r", encoding="utf-8") as arquivo:
+        st.markdown(f"<style>{arquivo.read()}</style>", unsafe_allow_html=True)
 
-def carregar_imagem_base64(caminho_imagem):
-    if not os.path.exists(caminho_imagem):
-        return ""
-    with open(caminho_imagem, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
+def carregar_imagem(caminho):
+    with open(caminho, "rb") as imagem:
+        return base64.b64encode(imagem.read()).decode()
 
-def validar_senha(senha):
-    if len(senha) < 8 or len(senha) > 16:
-        return False, "A senha deve ter entre 8 e 16 caracteres."
-    if not re.search(r"[a-z]", senha):
-        return False, "Falta pelo menos 1 letra minúscula."
-    if not re.search(r"[A-Z]", senha):
-        return False, "Falta pelo menos 1 letra maiúscula."
-    if not re.search(r"[0-9]", senha):
-        return False, "Falta pelo menos 1 número."
-    return True, "Ok"
+logo = carregar_imagem("Logo Com carinho, Flor.jpg")
 
-def validar_email(email):
-    return re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email) is not None
-
-def validar_cpf(cpf):
-    return re.fullmatch(r"\d{3}\.\d{3}\.\d{3}-\d{2}", cpf) is not None
-
-def autenticar_usuario(email, senha):
-    email = email.strip().lower()
-    for func in st.session_state.funcionarios:
-        if func["Email"].lower() == email and func["Senha"] == senha:
-            return func
-    return None
-
-logo_base64 = carregar_imagem_base64("logo.jpg")
-
-estrutura_setores = {
+setores = {
     "Administração": ["Cadastrar funcionário", "Gerenciar usuários"],
     "Financeiro": ["Movimentações", "Pagamentos"],
     "Atendimento ao Cliente": ["Cadastrar novo pedido", "Consultar Pedidos"],
     "Gestão de E-commerce": ["Catálogo de produtos"],
     "Estoque": ["Estoque"],
-    "Montagem": ["Fila de montagem"],
+    "Montagem": ["Fila de montagem"]
 }
 
 if "funcionarios" not in st.session_state:
