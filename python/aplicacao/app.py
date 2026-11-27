@@ -153,11 +153,22 @@ else:
             unsafe_allow_html=True,
         )
 
-    with st.sidebar:
-        st.title("Com carinho, Flor")
-        st.write(f"**Usuário:** {usuario['Nome']}")
-        st.write(f"**Setor:** {setor_usuario}")
-        st.divider()
+st.markdown(
+    f"""
+    <div class="caixa-usuario">
+        <div class="icone-pessoa" aria-hidden="true">
+            <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z"/>
+            </svg>
+        </div>
+        <div class="info-usuario">
+            <div><strong>Usuário:</strong> {usuario['Nome']}</div>
+            <div><strong>Setor:</strong> {setor}</div>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
         if setor_usuario == "Administração":
             setores_permitidos = list(estrutura_setores.keys())
