@@ -70,10 +70,11 @@ def autenticar_adm_exclusao(usuario, senha):
                 return True
     return False
 
-carregar_css("style.css")
-
 if st.session_state.usuario_logado is None:
+    carregar_css("style.css")
+
     margem_esq, centro, margem_dir = st.columns([0.5, 3.4, 0.5])
+
     with centro:
         lado_esq, lado_dir = st.columns([1, 1.05], gap="small")
 
